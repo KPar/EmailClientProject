@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Controller2 {
+public class LoginControl {
 
 	public void signIn(ActionEvent event) throws IOException {
 		Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
@@ -20,5 +20,15 @@ public class Controller2 {
 		window.show(); 
 		
 	}
-	
+
+    public void signUp(ActionEvent event) throws IOException {
+        Parent account = FXMLLoader.load(getClass().getResource("Sign-up.fxml"));
+        Scene accountscene = new Scene(account);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(accountscene);
+        window.show();
+
+    }
 }

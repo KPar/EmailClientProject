@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Controller {
+public class GUIControl {
 
 	public void signOut(ActionEvent event) throws IOException {
 		Parent account = FXMLLoader.load(getClass().getResource("Login.fxml"));
