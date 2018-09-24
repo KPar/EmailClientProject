@@ -57,6 +57,10 @@ public class SignupControl extends TextField{
 
     //Username field
     public void username(ActionEvent event){
+
+        if(username.getText().substring(0, username.getText().indexOf("@")).isEmpty()){
+            AlertBox("Username Error", "No username entered before '@yg.com.'");
+        }
         if(!username.getText().endsWith("@yg.com")){
             AlertBox("Username Error", "must have @yg.com at the end.");
         }
@@ -87,10 +91,22 @@ public class SignupControl extends TextField{
     public void signup(ActionEvent evt){
 
         //gets first and last name
+        if(firstname.getText().isEmpty()){
+            AlertBox("First name Error", "No first name entered.");
+        }
         firstname.setText(firstname.getText());
+        if(lastname.getText().isEmpty()){
+            AlertBox("Last name Error", "No last name entered.");
+        }
         lastname.setText(lastname.getText());
 
         //username check
+        if(username.getText().substring(0, username.getText().indexOf("@")).isEmpty()){
+            AlertBox("Username Error", "No username entered before '@yg.com.'");
+        }
+        if(username.getText().isEmpty()){
+            AlertBox("Username Error", "No username entered.");
+        }
         if(!username.getText().endsWith("@yg.com")){
             AlertBox("Username Error", "must have @yg.com at the end.");
         }
