@@ -51,10 +51,23 @@ public class SignupControl extends TextField{
             AlertBox("Username Error", "No username entered.");
             return;
         }
+        //checks for multiple '@'
+        int total=0;
+        for(int i=0; i<username.getText().length(); i++) {
+            if(username.getText().charAt(i) == '@') {
+                total++;
+            }
+            if(total>1) {
+                AlertBox("Username Error", "Cannot Use More Than One '@'");
+                return;
+            }
+        }
+
         if(!username.getText().endsWith("@yg.com")){
             AlertBox("Username Error", "must have @yg.com at the end.");
             return;
         }
+
         if(username.getText().substring(0, username.getText().indexOf("@")).isEmpty()){
             AlertBox("Username Error", "No username entered before '@yg.com.'");
         }
@@ -146,4 +159,5 @@ public class SignupControl extends TextField{
         window.showAndWait();
 
     }
+
 }
