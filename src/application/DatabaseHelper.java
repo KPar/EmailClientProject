@@ -57,7 +57,8 @@ public class DatabaseHelper {
         }
     }
 
-    public void setupNewAccount(String firstName, String lastName, String emailAddress, String password){
+    //sets up account and returns userId
+    public int setupNewAccount(String firstName, String lastName, String emailAddress, String password){
         int atSplit= emailAddress.indexOf('@');
         String localPart=emailAddress.substring(0,atSplit);
         String domain=emailAddress.substring(atSplit+1);
@@ -75,5 +76,6 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return getEmailAccount(emailAddress);
     }
 }
