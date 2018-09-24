@@ -17,8 +17,8 @@
                   <Font name="Chalkduster" size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="username" layoutX="217.0" layoutY="125.0" promptText="turbothesnail@snail.edu" />
-            <TextField fx:id="password" layoutX="217.0" layoutY="170.0" promptText="SnailsareNotS7u6s!!!" />
+            <TextField fx:id="usernameTextField" layoutX="217.0" layoutY="125.0" promptText="turbothesnail@snail.edu" />
+            <TextField fx:id="passwordTextField" layoutX="217.0" layoutY="170.0" promptText="SnailsareNotS7u6s!!!" />
             <Button layoutX="269.0" layoutY="223.0" mnemonicParsing="false" onAction="#signIn" text="Sign-in" />
             <Label layoutX="130.0" layoutY="130.0" text="User Name:" />
             <Label layoutX="134.0" layoutY="175.0" text="Password:" />

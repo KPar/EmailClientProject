@@ -93,7 +93,7 @@ public class SignupControl extends TextField{
     }
 
     //checks all fields
-    public void signup(ActionEvent event){
+    public void signup(ActionEvent event) throws IOException{
         String firstName="";
         String lastName="";
         String emailAddress="";
@@ -156,14 +156,19 @@ public class SignupControl extends TextField{
         }
 
         dbHelper = new DatabaseHelper();
-
         if(dbHelper.getEmailAccount(emailAddress)!=0){
             AlertBox("Email Address Error ", "Email already exists. Choose a different address or login");
         }else{
-            dbHelper.setupNewAccount(firstName,lastName,emailAddress,password);
+            GUIControl.userId=dbHelper.setupNewAccount(firstName,lastName,emailAddress,password);  //sets the userId in GUIControl to associate it with account
         }
 
+        Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+        Scene accountscene = new Scene(account);
 
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(accountscene);
+        window.show();
 
     }
 

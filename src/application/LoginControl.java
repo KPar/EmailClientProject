@@ -1,6 +1,5 @@
 package application;
 
-import java.awt.*;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,42 +11,63 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
 import javafx.scene.control.TextField;
 
 public class LoginControl {
+    DatabaseHelper dbHelper;
 
     @FXML
-    private TextField username;
+    private TextField usernameTextField;
 
     @FXML
-    private TextField password;
+    private TextField passwordTextField;
 
 
 	public void signIn(ActionEvent event) throws IOException {
+        String emailAddress="";
+        String password="";
+        dbHelper= new DatabaseHelper();
 	    //change this to check usernames in the database.
-	    if(username.getText().isEmpty()){
+	    if(usernameTextField.getText().isEmpty()){
 	        AlertBox("Username Error", "No Username entered.");
 	        return;
-        }
-	    if(!username.getText().endsWith("@yg.com")){
+        }else if(!usernameTextField.getText().endsWith("@yg.com")){
 	        AlertBox("Username Error", "Must have '@yg.com' at the end.");
 	        return;
+        }else {
+	        emailAddress=usernameTextField.getText();
         }
 
         //change this to check passwords.
-        if(password.getText().isEmpty()){
+        if(passwordTextField.getText().isEmpty()){
             AlertBox("Password Error", "No password entered.");
+            return;
+        }else{
+            password=passwordTextField.getText();
+        }
+
+        int userId = dbHelper.getEmailAccount(emailAddress);
+        if(userId!=0){
+            if(dbHelper.checkPassword(userId,password)){
+                GUIControl.userId=userId;
+
+                Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+                Scene accountscene = new Scene(account);
+
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+                window.setScene(accountscene);
+                window.show();
+            }else{
+                AlertBox("Password Error", "Incorrect Password.");
+                return;
+            }
+        }else{
+            AlertBox("Email Address Error", "Email does not exist.");
             return;
         }
 
-		Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
-		Scene accountscene = new Scene(account);
-		
-		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow(); 
-		
-		window.setScene(accountscene);
-		window.show(); 
+
 		
 	}
 
