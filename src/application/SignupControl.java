@@ -71,10 +71,12 @@ public class SignupControl extends TextField{
 
         if(usernameTextField.getText().substring(0, usernameTextField.getText().indexOf("@")).isEmpty()){
             AlertBox("Username Error", "No username entered before '@yg.com.'");
+            return;
         }
 
         if(this.usernameTextField.getText().length() > 20){
             AlertBox("Username Error", "Username Cannot be more than 20 characters.");
+            return;
         }
     }
 
@@ -82,6 +84,7 @@ public class SignupControl extends TextField{
     public void password(ActionEvent event){
         if(this.passwordTextField.getText().length() < 4 || this.passwordTextField.getText().length() > 12){
             AlertBox("Password Error", "Password has to be between 4-12 characters.");
+            return;
         }
     }
 
@@ -89,6 +92,7 @@ public class SignupControl extends TextField{
     public void confirmpassword(ActionEvent event){
         if(!passwordTextField.getText().equals(confirmPasswordTextField.getText())) {
             AlertBox("Confirm Password Error", "Does not match password");
+            return;
         }
     }
 
@@ -137,8 +141,10 @@ public class SignupControl extends TextField{
             return;
         }else if(usernameTextField.getText().substring(0, usernameTextField.getText().indexOf("@")).isEmpty()){
             AlertBox("Username Error", "No username entered before '@yg.com.'");
+            return;
         }else if(this.usernameTextField.getText().length() > 20){
             AlertBox("Username Error", "Username Cannot be more than 20 characters.");
+            return;
         }else{
             emailAddress=usernameTextField.getText();
         }
@@ -146,11 +152,13 @@ public class SignupControl extends TextField{
         //password check
         if(this.passwordTextField.getText().length() < 4 || this.passwordTextField.getText().length() > 12){
             AlertBox("Password Error", "Password has to be between 4-12 characters.");
+            return;
         }
 
         //confirmpassword check
         if(!passwordTextField.getText().equals(confirmPasswordTextField.getText())) {
             AlertBox("Confirm Password Error", "Does not match password");
+            return;
         }else{
             password=passwordTextField.getText();
         }
@@ -158,6 +166,7 @@ public class SignupControl extends TextField{
         dbHelper = new DatabaseHelper();
         if(dbHelper.getEmailAccount(emailAddress)!=0){
             AlertBox("Email Address Error ", "Email already exists. Choose a different address or login");
+            return;
         }else{
             GUIControl.userId=dbHelper.setupNewAccount(firstName,lastName,emailAddress,password);  //sets the userId in GUIControl to associate it with account
         }
