@@ -76,6 +76,7 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("ACCOUNT CREATED: "+ getEmailAccount(emailAddress));
         return getEmailAccount(emailAddress);
     }
 }

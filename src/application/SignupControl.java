@@ -14,25 +14,26 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 
-import javax.swing.*;
 import java.io.IOException;
 
 public class SignupControl extends TextField{
 
-    @FXML
-    private TextField username;
+    DatabaseHelper dbHelper;
 
     @FXML
-    private TextField password;
+    private TextField usernameTextField;
 
     @FXML
-    private TextField confirmpassword;
+    private TextField passwordTextField;
 
     @FXML
-    private TextField firstname;
+    private TextField confirmPasswordTextField;
 
     @FXML
-    private TextField lastname;
+    private TextField firstNameTextField;
+
+    @FXML
+    private TextField lastNameTextField;
 
     public void signIn(ActionEvent event) throws IOException {
         Parent account = FXMLLoader.load(getClass().getResource("Login.fxml"));
@@ -47,14 +48,14 @@ public class SignupControl extends TextField{
 
     //Username field
     public void username(ActionEvent event){
-        if(username.getText().isEmpty()){
+        if(usernameTextField.getText().isEmpty()){
             AlertBox("Username Error", "No username entered.");
             return;
         }
         //checks for multiple '@'
         int total=0;
-        for(int i=0; i<username.getText().length(); i++) {
-            if(username.getText().charAt(i) == '@') {
+        for(int i = 0; i< usernameTextField.getText().length(); i++) {
+            if(usernameTextField.getText().charAt(i) == '@') {
                 total++;
             }
             if(total>1) {
@@ -63,77 +64,107 @@ public class SignupControl extends TextField{
             }
         }
 
-        if(!username.getText().endsWith("@yg.com")){
+        if(!usernameTextField.getText().endsWith("@yg.com")){
             AlertBox("Username Error", "must have @yg.com at the end.");
             return;
         }
 
-        if(username.getText().substring(0, username.getText().indexOf("@")).isEmpty()){
+        if(usernameTextField.getText().substring(0, usernameTextField.getText().indexOf("@")).isEmpty()){
             AlertBox("Username Error", "No username entered before '@yg.com.'");
         }
 
-        if(this.username.getText().length() > 20){
+        if(this.usernameTextField.getText().length() > 20){
             AlertBox("Username Error", "Username Cannot be more than 20 characters.");
         }
-
-        this.username.setText(this.username.getText());
     }
 
     //password field
     public void password(ActionEvent event){
-        if(this.password.getText().length() < 4 || this.password.getText().length() > 12){
+        if(this.passwordTextField.getText().length() < 4 || this.passwordTextField.getText().length() > 12){
             AlertBox("Password Error", "Password has to be between 4-12 characters.");
         }
-        this.password.setText(this.password.getText());
     }
 
     //Confirmpassword field
     public void confirmpassword(ActionEvent event){
-        if(!password.getText().equals(confirmpassword.getText())) {
+        if(!passwordTextField.getText().equals(confirmPasswordTextField.getText())) {
             AlertBox("Confirm Password Error", "Does not match password");
         }
     }
 
     //checks all fields
-    public void signup(ActionEvent evt){
+    public void signup(ActionEvent event){
+        String firstName="";
+        String lastName="";
+        String emailAddress="";
+        String password="";
 
-        //gets first and last name
-        if(firstname.getText().isEmpty()){
+        //gets first
+        if(firstNameTextField.getText().isEmpty()){
             AlertBox("First name Error", "No first name entered.");
             return;
+        }else{
+            firstName=firstNameTextField.getText();
         }
-        firstname.setText(firstname.getText());
-        if(lastname.getText().isEmpty()){
+
+        //get last name
+        if(lastNameTextField.getText().isEmpty()){
             AlertBox("Last name Error", "No last name entered.");
             return;
+        }else{
+            lastName=lastNameTextField.getText();
         }
-        lastname.setText(lastname.getText());
 
         //username check
-        if(username.getText().isEmpty()){
+        if(usernameTextField.getText().isEmpty()){
             AlertBox("Username Error", "No username entered.");
             return;
         }
-        if(!username.getText().endsWith("@yg.com")){
+        //checks for multiple '@'
+        int total=0;
+        for(int i = 0; i< usernameTextField.getText().length(); i++) {
+            if(usernameTextField.getText().charAt(i) == '@') {
+                total++;
+            }
+            if(total>1) {
+                AlertBox("Username Error", "Cannot Use More Than One '@'");
+                return;
+            }
+        }
+
+        if(!usernameTextField.getText().endsWith("@yg.com")){
             AlertBox("Username Error", "must have @yg.com at the end.");
             return;
-        }
-        if(username.getText().substring(0, username.getText().indexOf("@")).isEmpty()){
+        }else if(usernameTextField.getText().substring(0, usernameTextField.getText().indexOf("@")).isEmpty()){
             AlertBox("Username Error", "No username entered before '@yg.com.'");
-        }
-        if(this.username.getText().length() > 20){
+        }else if(this.usernameTextField.getText().length() > 20){
             AlertBox("Username Error", "Username Cannot be more than 20 characters.");
+        }else{
+            emailAddress=usernameTextField.getText();
         }
 
         //password check
-        if(this.password.getText().length() < 4 || this.password.getText().length() > 12){
+        if(this.passwordTextField.getText().length() < 4 || this.passwordTextField.getText().length() > 12){
             AlertBox("Password Error", "Password has to be between 4-12 characters.");
         }
 
         //confirmpassword check
-        if(!password.getText().equals(confirmpassword.getText())) {
+        if(!passwordTextField.getText().equals(confirmPasswordTextField.getText())) {
             AlertBox("Confirm Password Error", "Does not match password");
+        }else{
+            password=passwordTextField.getText();
         }
+
+        dbHelper = new DatabaseHelper();
+
+        if(dbHelper.getEmailAccount(emailAddress)!=0){
+            AlertBox("Email Address Error ", "Email already exists. Choose a different address or login");
+        }else{
+            dbHelper.setupNewAccount(firstName,lastName,emailAddress,password);
+        }
+
+
+
     }
 
     private void AlertBox(String title, String message){
