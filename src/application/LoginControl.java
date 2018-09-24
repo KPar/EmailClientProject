@@ -28,14 +28,17 @@ public class LoginControl {
 	    //change this to check usernames in the database.
 	    if(username.getText().isEmpty()){
 	        AlertBox("Username Error", "No Username entered.");
+	        return;
         }
 	    if(!username.getText().endsWith("@yg.com")){
 	        AlertBox("Username Error", "Must have '@yg.com' at the end.");
+	        return;
         }
 
         //change this to check passwords.
         if(password.getText().isEmpty()){
             AlertBox("Password Error", "No password entered.");
+            return;
         }
 
 		Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
