@@ -1,16 +1,43 @@
 package application;
 
+import java.awt.*;
 import java.io.IOException;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
+import javafx.scene.control.TextField;
 
 public class LoginControl {
 
+    @FXML
+    private TextField username;
+
+    @FXML
+    private TextField password;
+
+
 	public void signIn(ActionEvent event) throws IOException {
+	    //change this to check usernames in the database.
+	    if(username.getText().isEmpty()){
+	        AlertBox("Username Error", "No Username entered.");
+        }
+	    if(!username.getText().endsWith("@yg.com")){
+	        AlertBox("Username Error", "Must have '@yg.com' at the end.");
+        }
+
+        //change this to check passwords.
+        if(password.getText().isEmpty()){
+            AlertBox("Password Error", "No password entered.");
+        }
+
 		Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
 		Scene accountscene = new Scene(account);
 		
@@ -31,4 +58,29 @@ public class LoginControl {
         window.show();
 
     }
+
+    private void AlertBox(String title, String message){
+        Stage window = new Stage();
+
+        //Block events to other windows
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle(title);
+        window.setMinWidth(250);
+
+        javafx.scene.control.Label label = new javafx.scene.control.Label();
+        label.setText(message);
+        javafx.scene.control.Button closeButton = new javafx.scene.control.Button("OK");
+        closeButton.setOnAction(e -> window.close());
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(label, closeButton);
+        layout.setAlignment(Pos.CENTER);
+
+        //Display window and wait for it to be closed before returning
+        Scene scene = new Scene(layout);
+        window.setScene(scene);
+        window.showAndWait();
+
+    }
+
 }

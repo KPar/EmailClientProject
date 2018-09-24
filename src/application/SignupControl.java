@@ -45,24 +45,18 @@ public class SignupControl extends TextField{
 
     }
 
-    //First name field
-    public void firstname(ActionEvent evt){
-        firstname.setText(firstname.getText());
-    }
-
-    //Last name field
-    public void lastname(ActionEvent evt){
-        lastname.setText(lastname.getText());
-    }
-
     //Username field
     public void username(ActionEvent event){
-
-        if(username.getText().substring(0, username.getText().indexOf("@")).isEmpty()){
-            AlertBox("Username Error", "No username entered before '@yg.com.'");
+        if(username.getText().isEmpty()){
+            AlertBox("Username Error", "No username entered.");
+            return;
         }
         if(!username.getText().endsWith("@yg.com")){
             AlertBox("Username Error", "must have @yg.com at the end.");
+            return;
+        }
+        if(username.getText().substring(0, username.getText().indexOf("@")).isEmpty()){
+            AlertBox("Username Error", "No username entered before '@yg.com.'");
         }
 
         if(this.username.getText().length() > 20){
@@ -93,22 +87,26 @@ public class SignupControl extends TextField{
         //gets first and last name
         if(firstname.getText().isEmpty()){
             AlertBox("First name Error", "No first name entered.");
+            return;
         }
         firstname.setText(firstname.getText());
         if(lastname.getText().isEmpty()){
             AlertBox("Last name Error", "No last name entered.");
+            return;
         }
         lastname.setText(lastname.getText());
 
         //username check
-        if(username.getText().substring(0, username.getText().indexOf("@")).isEmpty()){
-            AlertBox("Username Error", "No username entered before '@yg.com.'");
-        }
         if(username.getText().isEmpty()){
             AlertBox("Username Error", "No username entered.");
+            return;
         }
         if(!username.getText().endsWith("@yg.com")){
             AlertBox("Username Error", "must have @yg.com at the end.");
+            return;
+        }
+        if(username.getText().substring(0, username.getText().indexOf("@")).isEmpty()){
+            AlertBox("Username Error", "No username entered before '@yg.com.'");
         }
         if(this.username.getText().length() > 20){
             AlertBox("Username Error", "Username Cannot be more than 20 characters.");

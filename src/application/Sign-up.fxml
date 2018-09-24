@@ -17,8 +17,8 @@
                   <Font name="Charter Roman" size="25.0" />
                </font>
             </Label>
-            <TextField fx:id="firstname" layoutX="109.0" layoutY="119.0" onAction="#firstname" prefHeight="27.0" prefWidth="248.0" promptText="First name" />
-            <TextField fx:id="lastname" layoutX="109.0" layoutY="177.0" onAction="#lastname" prefHeight="27.0" prefWidth="248.0" promptText="Last name" />
+            <TextField fx:id="firstname" layoutX="109.0" layoutY="119.0" prefHeight="27.0" prefWidth="248.0" promptText="First name" />
+            <TextField fx:id="lastname" layoutX="109.0" layoutY="177.0" prefHeight="27.0" prefWidth="248.0" promptText="Last name" />
             <TextField fx:id="username" layoutX="109.0" layoutY="235.0" onAction="#username" prefHeight="27.0" prefWidth="248.0" promptText="Username" />
             <TextField fx:id="password" layoutX="109.0" layoutY="305.0" onAction="#password" prefHeight="27.0" prefWidth="248.0" promptText="Password" />
             <TextField fx:id="confirmpassword" layoutX="110.0" layoutY="357.0" onAction="#confirmpassword" prefHeight="27.0" prefWidth="248.0" promptText="Confirm password" />
