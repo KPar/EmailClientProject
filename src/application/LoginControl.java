@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -20,7 +21,7 @@ public class LoginControl {
     private TextField usernameTextField;
 
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordTextField;
 
 
 	public void signIn(ActionEvent event) throws IOException {
@@ -46,7 +47,7 @@ public class LoginControl {
             password=passwordTextField.getText();
         }
 
-        int userId = dbHelper.getEmailAccount(emailAddress);
+        int userId = dbHelper.getUserId(emailAddress);
         if(userId!=0){
             if(dbHelper.checkPassword(userId,password)){
                 GUIControl.userId=userId;

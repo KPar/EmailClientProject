@@ -57,7 +57,7 @@
    <left>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="29.0" prefWidth="197.0" text="UserName@cq.edu" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
+            <Label fx:id="emailAddressLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="29.0" prefWidth="197.0" text="UserName@cq.edu" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
             <TreeView prefHeight="293.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#signOut" prefHeight="45.0" prefWidth="200.0" text="Sign Out" VBox.vgrow="ALWAYS" />
          </children>

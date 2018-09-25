@@ -16,8 +16,31 @@ public class DatabaseHelper {
         return conn;
     }
 
+    public String getEmailAddress (int userId){
+        String emailAddress="";
+        String localPart="";
+        String domain="";
+        String sql = "SELECT localPart, domain FROM UsersTable WHERE id="+userId;
+
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            if (!rs.isBeforeFirst()){
+                return null;
+            }else{
+                localPart=rs.getString("localPart");
+                domain=rs.getString("domain");
+                emailAddress=localPart+"@"+domain;
+                return emailAddress;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
     //queries db for email, if it exists, it returns the userId
-    public int getEmailAccount (String emailAddress){
+    public int getUserId(String emailAddress){
         int atSplit= emailAddress.indexOf('@');
         String localPart=emailAddress.substring(0,atSplit);
         String domain=emailAddress.substring(atSplit+1);
@@ -76,7 +99,7 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("ACCOUNT CREATED: "+ getEmailAccount(emailAddress));
-        return getEmailAccount(emailAddress);
+        System.out.println("ACCOUNT CREATED: "+ getUserId(emailAddress));
+        return getUserId(emailAddress);
     }
 }
