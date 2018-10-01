@@ -35,4 +35,15 @@ public class GUIControl {
 		window.show(); 
 		
 	}
+
+	public void composeEmail(ActionEvent evt) throws IOException {
+        System.out.println("this user: "+userId);
+        Parent account = FXMLLoader.load(getClass().getResource("Email.fxml"));
+        Scene accountscene = new Scene(account);
+
+        Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
+
+        window.setScene(accountscene);
+        window.show();
+    }
 }
