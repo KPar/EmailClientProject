@@ -136,9 +136,9 @@ public class DatabaseHelper {
                 System.out.println(e.getMessage());
             }
             if(emailStatus==0){
-                System.out.println("Email sent with Subject: "+subject+" and Content: "+content);
+                System.out.println("Email sent to: "+recipient+" from "+getEmailAddress(senderUserId)+" with Subject: "+subject+" and Content: "+content);
             }else{
-                System.out.println("Email draft saved with Subject:"+subject+" and Content: "+content);
+                System.out.println("Email draft saved to: "+recipient+" from "+getEmailAddress(senderUserId)+"  with Subject:"+subject+" and Content: "+content);
             }
             return true;
         }
