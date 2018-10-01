@@ -19,7 +19,6 @@ public class GUIControl {
 
 	public void initialize(){
 		dbHelper=new DatabaseHelper();
-		System.out.println("startup");
 		emailAddressLabel.setText(dbHelper.getEmailAddress(userId));
 
 	}

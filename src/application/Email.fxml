@@ -30,7 +30,8 @@
          <children>
             <TextArea fx:id="contentTextField" layoutX="35.0" layoutY="14.0" prefHeight="218.0" prefWidth="530.0" />
             <Button layoutX="522.0" layoutY="257.0" mnemonicParsing="false" onAction="#send" text="Send" />
-            <Button layoutX="446.0" layoutY="257.0" mnemonicParsing="false" onAction="#discard" text="Discard" />
+            <Button layoutX="383.0" layoutY="257.0" mnemonicParsing="false" onAction="#discard" text="Discard" />
+            <Button layoutX="459.0" layoutY="257.0" mnemonicParsing="false" onAction="#draft" text="Draft" />
          </children>
       </AnchorPane>
    </children>

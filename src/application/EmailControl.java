@@ -51,6 +51,24 @@ public class EmailControl extends TextField {
         }
     }
 
+    public void draft(ActionEvent evt) throws IOException{
+
+        String recipient = recipientTextField.getText();
+        String subject = subjectTextField.getText();
+        String content = contentTextField.getText();
+        if(dbHelper.sendEmail(GUIControl.userId,recipient,subject, content, 1)){
+            Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+            Scene accountscene = new Scene(account);
+
+            Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
+
+            window.setScene(accountscene);
+            window.show();
+        }else{
+            AlertBox("Email Error", "Invalid Email");
+        }
+    }
+
     public void discard(ActionEvent evt) throws IOException{
         System.out.println("Discard email.");
         Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));

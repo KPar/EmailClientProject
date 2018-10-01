@@ -134,7 +134,11 @@ public class DatabaseHelper {
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-            System.out.println("Email sent: "+content);
+            if(emailStatus==0){
+                System.out.println("Email sent with Subject: "+subject+" and Content: "+content);
+            }else{
+                System.out.println("Email draft saved with Subject:"+subject+" and Content: "+content);
+            }
             return true;
         }
 
