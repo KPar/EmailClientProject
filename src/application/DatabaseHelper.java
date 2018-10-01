@@ -1,6 +1,8 @@
 package application;
 
 import java.sql.*;
+import java.util.Date;
+import java.text.*;
 
 public class DatabaseHelper {
 
@@ -101,5 +103,40 @@ public class DatabaseHelper {
         }
         System.out.println("ACCOUNT CREATED: "+ getUserId(emailAddress));
         return getUserId(emailAddress);
+    }
+
+    //sets up account and returns userId
+    public boolean sendEmail(int senderUserId, String recipient, String subject, String content, int emailStatus){
+
+        if (getUserId(recipient)==0){
+            return false;
+        }else{
+            Date date = new Date();
+            long dateNum = date.getTime();
+
+            SimpleDateFormat ft =
+                    new SimpleDateFormat ("MMM dd, yyyy 'at' hh:mm:ss a zzz");
+
+            String dateText= ft.format(date);
+
+            String sql = "INSERT INTO EmailsTable(subject,content,emailStatus,senderId,dateText,dateInteger) VALUES(?,?,?,?,?,?)";
+
+            try (Connection conn = this.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, subject);
+                pstmt.setString(2, content);
+                pstmt.setInt(3, emailStatus);
+                pstmt.setInt(4, senderUserId);
+                pstmt.setString(5, dateText);
+                pstmt.setLong(6, dateNum);
+
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            System.out.println("Email sent: "+content);
+            return true;
+        }
+
     }
 }
