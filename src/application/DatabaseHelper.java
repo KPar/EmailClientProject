@@ -107,8 +107,8 @@ public class DatabaseHelper {
 
     //sets up account and returns userId
     public boolean sendEmail(int senderUserId, String recipient, String subject, String content, int emailStatus){
-
-        if (getUserId(recipient)==0){
+        int recipientUserId = getUserId(recipient);
+        if (recipientUserId==0){
             return false;
         }else{
             Date date = new Date();
@@ -119,7 +119,7 @@ public class DatabaseHelper {
 
             String dateText= ft.format(date);
 
-            String sql = "INSERT INTO EmailsTable(subject,content,emailStatus,senderId,dateText,dateInteger) VALUES(?,?,?,?,?,?)";
+            String sql = "INSERT INTO EmailsTable(subject,content,emailStatus,senderId,recipientId,dateText,dateInteger) VALUES(?,?,?,?,?,?,?)";
 
             try (Connection conn = this.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -127,8 +127,9 @@ public class DatabaseHelper {
                 pstmt.setString(2, content);
                 pstmt.setInt(3, emailStatus);
                 pstmt.setInt(4, senderUserId);
-                pstmt.setString(5, dateText);
-                pstmt.setLong(6, dateNum);
+                pstmt.setInt(5, recipientUserId);
+                pstmt.setString(6, dateText);
+                pstmt.setLong(7, dateNum);
 
                 pstmt.executeUpdate();
             } catch (SQLException e) {
