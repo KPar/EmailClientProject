@@ -1,8 +1,10 @@
 package application;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.*;
+import java.util.List;
 
 public class DatabaseHelper {
 
@@ -34,6 +36,24 @@ public class DatabaseHelper {
                 domain=rs.getString("domain");
                 emailAddress=localPart+"@"+domain;
                 return emailAddress;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public String getName (int userId){
+        String sql = "SELECT firstName, lastName FROM UsersTable WHERE id="+userId;
+
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            if (!rs.isBeforeFirst()){
+                return null;
+            }else{
+                String name=rs.getString("firstName")+" "+rs.getString("lastName");
+                return name;
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -143,5 +163,90 @@ public class DatabaseHelper {
             return true;
         }
 
+    }
+
+    public List getEmails(int userId, int currentFolder){
+        String sql;
+        switch (currentFolder){
+            case 0:
+                sql = "SELECT * FROM EmailsTable WHERE recipientId="+userId+" AND emailStatus="
+                        +0+" ORDER BY dateInteger DESC";
+                break;
+            case 1:
+                sql = "SELECT * FROM EmailsTable WHERE senderId="+userId+" AND emailStatus="
+                        +0+" ORDER BY dateInteger DESC";
+                break;
+            case 2:
+                sql = "SELECT * FROM EmailsTable WHERE senderId="+userId+" AND emailStatus="
+                        +1+" ORDER BY dateInteger DESC";
+                break;
+            default:
+                sql = "SELECT * FROM EmailsTable WHERE recipientId="+userId+" AND emailStatus="
+                        +0+" ORDER BY dateInteger DESC";
+                break;
+        }
+
+        List<String> list = new ArrayList<>();
+        String data ="";
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            if (!rs.isBeforeFirst()){
+                return null;
+            }else{
+                while((rs.next())){
+                    data=getName(rs.getInt("senderId"))+"               "+rs.getString("dateText")+"\n"
+                            +rs.getString("subject");
+                    list.add(data);
+                }
+                return list;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public String[] getEmailContent(int userId, int emailPosition, int currentFolder){
+        String sql;
+        switch (currentFolder){
+            case 0:
+                sql = "SELECT * FROM EmailsTable WHERE recipientId="+userId+" AND emailStatus="
+                        +0+" ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
+                break;
+            case 1:
+                sql = "SELECT * FROM EmailsTable WHERE senderId="+userId+" AND emailStatus="
+                        +0+" ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
+                break;
+            case 2:
+                sql = "SELECT * FROM EmailsTable WHERE senderId="+userId+" AND emailStatus="
+                        +1+" ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
+                break;
+            default:
+                sql = "SELECT * FROM EmailsTable WHERE recipientId="+userId+" AND emailStatus="
+                        +0+" ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
+                break;
+        }
+
+        String[] emailContentArray = new String[5];
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            if (!rs.isBeforeFirst()){
+                return null;
+            }else{
+                    emailContentArray[0]=getName(rs.getInt("senderId"));
+                    emailContentArray[1]=getEmailAddress(rs.getInt("senderId"));
+                    emailContentArray[2]=rs.getString("dateText");
+                    emailContentArray[3]=rs.getString("subject");
+                    emailContentArray[4]=rs.getString("content");
+                    return emailContentArray;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 }

@@ -3,48 +3,21 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GUIControl">
-   <top>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-         </children>
-      </VBox>
-   </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GUIControl">
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="17.0" prefWidth="600.0" text="\@SnailTheMail2018" HBox.hgrow="ALWAYS" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="600.0" text="SnailTheMail2018" HBox.hgrow="ALWAYS" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -57,30 +30,41 @@
    <left>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="emailAddressLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="29.0" prefWidth="197.0" text="UserName@cq.edu" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
-            <TreeView prefHeight="293.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#signOut" prefHeight="45.0" prefWidth="200.0" text="Sign Out" VBox.vgrow="ALWAYS" />
+            <Label fx:id="emailAddressLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="66.0" prefWidth="197.0" text="UserName@cq.edu" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
+            <Button fx:id="inboxBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 0;" text="INBOX">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="sentBttn" layoutX="10.0" layoutY="37.0" mnemonicParsing="false" onAction="#refreshList" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 0;" text="SENT">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="draftsBttn" layoutX="10.0" layoutY="67.0" mnemonicParsing="false" onAction="#refreshList" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 0;" text="DRAFTS">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Button>
+            <Pane prefHeight="151.0" prefWidth="200.0" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#signOut" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 0;" text="SIGN OUT" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="Calibri Bold" size="16.0" />
+               </font></Button>
          </children>
       </VBox>
    </left>
    <center>
-      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TabPane prefHeight="200.0" prefWidth="401.0" tabClosingPolicy="UNAVAILABLE">
-                    <tabs>
-                      <Tab text="Inbox">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="153.0" />
-                        </content>
-                      </Tab>
-                    </tabs>
-                  </TabPane>
+                  <ListView fx:id="emailListView" layoutX="56.0" layoutY="-41.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" onMouseClicked="#displayEmail" prefHeight="173.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
+                  <TextArea fx:id="emailTextArea" editable="false" layoutX="-15.0" layoutY="-27.0" prefHeight="173.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Button layoutX="307.0" layoutY="143.0" mnemonicParsing="false" onAction="#composeEmail" text="Compose" />
                </children></AnchorPane>
         </items>
