@@ -168,11 +168,11 @@ public class SignupControl extends TextField{
             }
         }
 
-        if(!usernameTextField.getText().endsWith("@yg.com")){
-            AlertBox("Username Error", "must have @yg.com at the end.");
+        if(!(usernameTextField.getText().endsWith("@cq.edu") || usernameTextField.getText().endsWith("@yg.com") || usernameTextField.getText().endsWith("@lnb.gov"))){
+            AlertBox("Username Error", "must have domain at the end.");
             return;
         }else if(usernameTextField.getText().substring(0, usernameTextField.getText().indexOf("@")).isEmpty()){
-            AlertBox("Username Error", "No username entered before '@yg.com.'");
+            AlertBox("Username Error", "No username entered.");
             return;
         }else if(this.usernameTextField.getText().length() > 20){
             AlertBox("Username Error", "Username Cannot be more than 20 characters.");
