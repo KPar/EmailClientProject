@@ -6,11 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 
@@ -24,16 +22,44 @@ public class SignupControl extends TextField{
     private TextField usernameTextField;
 
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordTextField;
 
     @FXML
-    private TextField confirmPasswordTextField;
+    private PasswordField confirmPasswordTextField;
 
     @FXML
     private TextField firstNameTextField;
 
     @FXML
     private TextField lastNameTextField;
+
+    @FXML
+    private CheckBox check;
+
+    @FXML
+    private TextField tf;
+
+    @FXML
+    private ComboBox domain;
+
+    public void initialize(){
+        domain.getItems().addAll("@cq.edu","@yg.com","@lnb.gov");
+        passwordTextField.textProperty().bindBidirectional(tf.textProperty());
+        tf.managedProperty().bind(check.selectedProperty());
+        tf.visibleProperty().bind(check.selectedProperty());
+        passwordTextField.managedProperty().bind(check.selectedProperty().not());
+        passwordTextField.visibleProperty().bind(check.selectedProperty().not());
+    }
+
+
+    public void domainselect(){
+        if(usernameTextField.getText().toLowerCase().contains("@yg.com") || usernameTextField.getText().toLowerCase().contains("@cq.edu") || usernameTextField.getText().toLowerCase().contains("@lnb.gov")) {
+            usernameTextField.setText(usernameTextField.getText().substring(0,usernameTextField.getText().indexOf("@")));
+            usernameTextField.appendText(domain.getSelectionModel().getSelectedItem().toString());
+            return;
+        }
+        usernameTextField.appendText(domain.getSelectionModel().getSelectedItem().toString());
+    }
 
     public void signIn(ActionEvent event) throws IOException {
         Parent account = FXMLLoader.load(getClass().getResource("Login.fxml"));
@@ -47,11 +73,13 @@ public class SignupControl extends TextField{
     }
 
     //Username field
-    public void username(ActionEvent event){
+    public void username(){
+        //checks if field is empty
         if(usernameTextField.getText().isEmpty()){
             AlertBox("Username Error", "No username entered.");
             return;
         }
+
         //checks for multiple '@'
         int total=0;
         for(int i = 0; i< usernameTextField.getText().length(); i++) {
@@ -62,18 +90,22 @@ public class SignupControl extends TextField{
                 AlertBox("Username Error", "Cannot Use More Than One '@'");
                 return;
             }
+
         }
 
-        if(!usernameTextField.getText().endsWith("@yg.com")){
-            AlertBox("Username Error", "must have @yg.com at the end.");
+        //checks if username has domain at the end
+        if(!usernameTextField.getText().contains("@yg.com") && !usernameTextField.getText().contains("@cq.edu") && !usernameTextField.getText().contains("lnb.gov")){
+            AlertBox("Username Error", "No domain selected. Please select from the dropdown menu.");
             return;
         }
 
+        //checks username before domain
         if(usernameTextField.getText().substring(0, usernameTextField.getText().indexOf("@")).isEmpty()){
-            AlertBox("Username Error", "No username entered before '@yg.com.'");
+            AlertBox("Username Error", "No username entered");
             return;
         }
 
+        //checks length
         if(this.usernameTextField.getText().length() > 20){
             AlertBox("Username Error", "Username Cannot be more than 20 characters.");
             return;
@@ -81,15 +113,15 @@ public class SignupControl extends TextField{
     }
 
     //password field
-    public void password(ActionEvent event){
-        if(this.passwordTextField.getText().length() < 4 || this.passwordTextField.getText().length() > 12){
+    public void password() {
+        if (this.passwordTextField.getText().length() < 4 || this.passwordTextField.getText().length() > 12) {
             AlertBox("Password Error", "Password has to be between 4-12 characters.");
             return;
         }
     }
 
     //Confirmpassword field
-    public void confirmpassword(ActionEvent event){
+    public void confirmpassword(){
         if(!passwordTextField.getText().equals(confirmPasswordTextField.getText())) {
             AlertBox("Confirm Password Error", "Does not match password");
             return;
