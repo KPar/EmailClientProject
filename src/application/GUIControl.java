@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -98,7 +99,7 @@ public class GUIControl {
 
 	}
 
-	public void displayEmail(MouseEvent mouseEvent) {
+	public void displayEmail(MouseEvent mouseEvent) throws IOException {
 		String[] emailContent;
 		switch (currentFolder){
 			case 0:
@@ -109,7 +110,18 @@ public class GUIControl {
 				break;
 			case 2:
 				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),2);
-				break;
+
+				EmailControl.dftEmail=true;
+				EmailControl.emailId=Integer.parseInt(emailContent[5]);
+				Parent account = FXMLLoader.load(getClass().getResource("Email.fxml"));
+				Scene accountscene = new Scene(account);
+
+				Stage window = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+
+				window.setScene(accountscene);
+				window.show();
+
+				return;
 			default:
 				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),0);
 				break;
@@ -117,6 +129,62 @@ public class GUIControl {
 
 		}
 		emailTextArea.setText("From: "+emailContent[0]+"    ("+emailContent[1]+")\nDate: "+
-				emailContent[2]+"\n\nSubject: "+emailContent[3]+"\n"+emailContent[4]);
+				emailContent[2]+"\nSubject: "+emailContent[3]+"\n\n"+emailContent[4]);
+	}
+
+	public void directionalEmailMove(KeyEvent keyEvent) throws IOException {
+		displayEmail(null);
+	}
+
+	public void forwardEmail(ActionEvent actionEvent) throws IOException {
+		String[] emailContent;
+		switch (currentFolder){
+			case 0:
+				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),0);
+				break;
+			case 1:
+				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),1);
+				break;
+			default:
+				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),0);
+				break;
+		}
+
+		EmailControl.fwdEmail=true;
+		EmailControl.emailId=Integer.parseInt(emailContent[5]);
+
+		Parent account = FXMLLoader.load(getClass().getResource("Email.fxml"));
+		Scene accountscene = new Scene(account);
+
+		Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+
+		window.setScene(accountscene);
+		window.show();
+	}
+
+	public void replyEmail(ActionEvent actionEvent) throws IOException {
+		String[] emailContent;
+		switch (currentFolder){
+			case 0:
+				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),0);
+				break;
+			case 1:
+				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),1);
+				break;
+			default:
+				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),0);
+				break;
+		}
+
+		EmailControl.rpyEmail=true;
+		EmailControl.emailId=Integer.parseInt(emailContent[5]);
+
+		Parent account = FXMLLoader.load(getClass().getResource("Email.fxml"));
+		Scene accountscene = new Scene(account);
+
+		Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+
+		window.setScene(accountscene);
+		window.show();
 	}
 }

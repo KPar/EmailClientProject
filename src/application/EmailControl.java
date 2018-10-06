@@ -18,6 +18,16 @@ import java.io.IOException;
 
 public class EmailControl extends TextField {
 
+    static int emailId;
+    static Boolean dftEmail=false;
+    static Boolean fwdEmail=false;
+    static Boolean rpyEmail=false;
+
+
+    Boolean draftEmail=false;
+    Boolean forwardEmail=false;
+    Boolean replyEmail=false;
+
     DatabaseHelper dbHelper;
 
     @FXML
@@ -29,8 +39,44 @@ public class EmailControl extends TextField {
     @FXML
     private TextArea contentTextField;
 
+    @FXML
+    private Button discardButton;
+
     public void initialize(){
         dbHelper= new DatabaseHelper();
+        if(dftEmail){
+            draftEmail=true;
+            String[] emailContent=dbHelper.getEmailContent(emailId);
+            recipientTextField.setText(emailContent[1]);
+            subjectTextField.setText(emailContent[5]);
+            contentTextField.setText(emailContent[6]);
+
+            dftEmail=false;
+        }
+        if(fwdEmail){
+            forwardEmail=true;
+            String[] emailContent=dbHelper.getEmailContent(emailId);
+            subjectTextField.setText("Fwd: "+emailContent[5]);
+            contentTextField.setText("\n\n--------------Forwarding------------------\nFrom: "
+                    +emailContent[2]+" ("+emailContent[3]+")\n"
+                    +"Sent: "+emailContent[4]+"\nSubject: "+emailContent[5]+"\n\n"+emailContent[6]);
+
+            fwdEmail=false;
+        }
+
+        if(rpyEmail){
+            replyEmail=true;
+            String[] emailContent=dbHelper.getEmailContent(emailId);
+            recipientTextField.setText(emailContent[3]);
+            subjectTextField.setText("Re: "+emailContent[5]);
+            contentTextField.setText("\n\n------------Replying To-----------------\nFrom: "
+                    +emailContent[2]+" ("+emailContent[3]+")\n"
+                    +"Sent: "+emailContent[4]+"\nSubject: "+emailContent[5]+"\n\n"+emailContent[6]);
+
+            rpyEmail=false;
+        }
+
+
     }
 
     public void send(ActionEvent evt) throws IOException{
@@ -38,17 +84,32 @@ public class EmailControl extends TextField {
         String recipient = recipientTextField.getText();
         String subject = subjectTextField.getText();
         String content = contentTextField.getText();
-        if(dbHelper.sendEmail(GUIControl.userId,recipient,subject, content, 0)){
-            Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
-            Scene accountscene = new Scene(account);
+        if(draftEmail){
+            if(dbHelper.updateEmail(emailId, recipient, subject, content, 0)){
+                Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+                Scene accountscene = new Scene(account);
 
-            Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
+                Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
 
-            window.setScene(accountscene);
-            window.show();
-        }else{
-            AlertBox("Email Error", "Invalid Email");
+                window.setScene(accountscene);
+                window.show();
+            }else{
+                AlertBox("Email Error", "Invalid Email");
+            }
+        } else {
+            if(dbHelper.sendEmail(GUIControl.userId,recipient,subject, content, 0)){
+                Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+                Scene accountscene = new Scene(account);
+
+                Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
+
+                window.setScene(accountscene);
+                window.show();
+            }else{
+                AlertBox("Email Error", "Invalid Email");
+            }
         }
+
     }
 
     public void draft(ActionEvent evt) throws IOException{
@@ -56,17 +117,32 @@ public class EmailControl extends TextField {
         String recipient = recipientTextField.getText();
         String subject = subjectTextField.getText();
         String content = contentTextField.getText();
-        if(dbHelper.sendEmail(GUIControl.userId,recipient,subject, content, 1)){
-            Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
-            Scene accountscene = new Scene(account);
+        if(draftEmail){
+            if(dbHelper.updateEmail(emailId,recipient,subject, content, 1)){
+                Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+                Scene accountscene = new Scene(account);
 
-            Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
+                Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
 
-            window.setScene(accountscene);
-            window.show();
+                window.setScene(accountscene);
+                window.show();
+            }else{
+                AlertBox("Email Error", "Invalid Email");
+            }
         }else{
-            AlertBox("Email Error", "Invalid Email");
+            if(dbHelper.sendEmail(GUIControl.userId,recipient,subject, content, 1)){
+                Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+                Scene accountscene = new Scene(account);
+
+                Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
+
+                window.setScene(accountscene);
+                window.show();
+            }else{
+                AlertBox("Email Error", "Invalid Email");
+            }
         }
+
     }
 
     public void discard(ActionEvent evt) throws IOException{
@@ -86,7 +162,7 @@ public class EmailControl extends TextField {
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
-        window.setMinWidth(250);
+        window.setWidth(200);
 
         Label label = new Label();
         label.setText(message);

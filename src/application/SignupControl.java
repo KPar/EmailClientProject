@@ -164,7 +164,7 @@ public class SignupControl extends TextField{
         }
 
         dbHelper = new DatabaseHelper();
-        if(dbHelper.getUserId(emailAddress)!=0){
+        if(dbHelper.getUserId(emailAddress).length!=0){
             AlertBox("Email Address Error ", "Email already exists. Choose a different address or login");
             return;
         }else{
