@@ -46,9 +46,9 @@ public class LoginControl {
         }else{
             password=passwordTextField.getText();
         }
-
+        if(dbHelper.getUserId(emailAddress).length!=0){
         int userId = dbHelper.getUserId(emailAddress)[0];
-        if(userId!=0){
+
             if(dbHelper.checkPassword(userId,password)){
                 GUIControl.userId=userId;
 

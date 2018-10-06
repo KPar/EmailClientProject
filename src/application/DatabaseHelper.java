@@ -10,15 +10,54 @@ public class DatabaseHelper {
 
     private Connection connect() {
         // SQLite connection string
-        String url = "jdbc:sqlite:sqlite/db/EmailClientDatabase.db";
+        String url = "jdbc:sqlite:EmailClientDatabase.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
+
+            Statement stmt = conn.createStatement();
+            String sql = "CREATE TABLE IF NOT EXISTS EmailsTable ( " +
+                    "id INTEGER PRIMARY KEY, subject TEXT, " +
+                    "content TEXT, emailStatus INTEGER, senderId INTEGER, recipientId INTEGER, " +
+                    "dateText TEXT, dateInteger INTEGER" +
+                    ");";
+            stmt.execute(sql);
+            sql = "CREATE TABLE IF NOT EXISTS UsersTable (" +
+                    "id INTEGER PRIMARY KEY, password TEXT, firstName TEXT, " +
+                    "lastName TEXT, localPart TEXT, domain TEXT" +
+                    ");";
+            stmt.execute(sql);
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return conn;
     }
+    /*private Connection connect() {
+        // SQLite connection string
+        String url = "jdbc:sqlite:sqlite/db/EmailClientDatabase.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+
+            Statement stmt = conn.createStatement();
+            String sql = "CREATE TABLE IF NOT EXISTS EmailsTable ( " +
+                    "id INTEGER PRIMARY KEY, subject TEXT, " +
+                    "content TEXT, emailStatus INTEGER, senderId INTEGER, recipientId INTEGER, " +
+                    "dateText TEXT, dateInteger INTEGER" +
+                    ");";
+            stmt.execute(sql);
+            sql = "CREATE TABLE IF NOT EXISTS UsersTable (" +
+                    "id INTEGER PRIMARY KEY, password TEXT, firstName TEXT, " +
+                    "lastName TEXT, localPart TEXT, domain TEXT" +
+                    ");";
+            stmt.execute(sql);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }*/
 
     public String getEmailAddress (int userId){
         String emailAddress="";
