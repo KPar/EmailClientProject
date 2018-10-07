@@ -128,7 +128,7 @@ public class GUIControl {
 
 
 		}
-		emailTextArea.setText("From: "+emailContent[0]+"    ("+emailContent[1]+")\nDate: "+
+		emailTextArea.setText("From: "+emailContent[0]+"    ("+emailContent[1]+")\nSent: "+
 				emailContent[2]+"\nSubject: "+emailContent[3]+"\n\n"+emailContent[4]);
 	}
 
