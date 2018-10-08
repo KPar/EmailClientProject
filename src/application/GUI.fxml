@@ -59,10 +59,11 @@
                            <padding>
                               <Insets left="3.0" />
                            </padding></Button>
-                        <Region prefHeight="27.0" prefWidth="215.0" style="-fx-background-color: #1B2631;" HBox.hgrow="ALWAYS">
+                        <Region prefHeight="30.0" prefWidth="139.0" style="-fx-background-color: #1B2631;" HBox.hgrow="ALWAYS">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets></Region>
+                        <Button fx:id="deleteBttn" mnemonicParsing="false" prefHeight="30.0" text="DELETE" />
                         <Button mnemonicParsing="false" onAction="#replyEmail" prefHeight="30.0" prefWidth="69.0" styleClass="secondary-buttons" text="REPLY" />
                         <Button mnemonicParsing="false" onAction="#forwardEmail" prefHeight="30.0" styleClass="secondary-buttons" text="FORWARD" />
                      </children>
