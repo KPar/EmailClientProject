@@ -41,7 +41,7 @@
                   </HBox>
                   <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="387.0" prefWidth="472.0" VBox.vgrow="ALWAYS">
                      <items>
-                        <ListView fx:id="emailListView" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="emailListView" onMouseClicked="#displayEmail" prefHeight="200.0" prefWidth="200.0" />
                         <TextArea fx:id="emailTextArea" prefHeight="200.0" prefWidth="200.0" />
                      </items>
                   </SplitPane>
