@@ -5,34 +5,63 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmailControl">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmailControl">
    <children>
-      <HBox prefHeight="100.0" prefWidth="600.0">
+      <HBox prefHeight="13.0" prefWidth="600.0">
          <children>
-            <AnchorPane prefHeight="140.0" prefWidth="600.0">
-               <children>
-                  <Label layoutX="53.0" layoutY="29.0" text="To:" />
-                  <Label layoutX="32.0" layoutY="73.0" text="Subject:" />
-                  <TextField fx:id="recipientTextField" layoutX="80.0" layoutY="24.0" prefHeight="27.0" prefWidth="485.0" />
-                  <TextField fx:id="subjectTextField" layoutX="80.0" layoutY="68.0" prefHeight="27.0" prefWidth="485.0" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" />
-               </padding>
-            </AnchorPane>
+            <Label text="To:">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="recipientTextField" prefHeight="27.0" prefWidth="485.0" HBox.hgrow="ALWAYS" />
          </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets left="51.0" right="10.0" top="20.0" />
+         </padding>
       </HBox>
-      <AnchorPane prefHeight="256.0" prefWidth="600.0">
+      <HBox prefHeight="13.0" prefWidth="600.0">
          <children>
-            <TextArea fx:id="contentTextField" layoutX="35.0" layoutY="14.0" prefHeight="218.0" prefWidth="530.0" />
-            <Button layoutX="522.0" layoutY="257.0" mnemonicParsing="false" onAction="#send" text="Send" />
-            <Button fx:id="discardBttn" layoutX="383.0" layoutY="257.0" mnemonicParsing="false" onAction="#discard" text="Discard" />
-            <Button layoutX="459.0" layoutY="257.0" mnemonicParsing="false" onAction="#draft" text="Draft" />
+            <Label text="Subject:">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="subjectTextField" prefHeight="27.0" prefWidth="485.0" HBox.hgrow="ALWAYS" />
          </children>
-      </AnchorPane>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="30.0" left="20.0" right="10.0" top="20.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="218.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TextArea fx:id="contentTextField" prefHeight="218.0" prefWidth="530.0" HBox.hgrow="ALWAYS" />
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="18.0" prefWidth="600.0" spacing="15.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#send" text="Send" />
+            <Button fx:id="discardBttn" mnemonicParsing="false" onAction="#discard" text="Discard" />
+            <Button mnemonicParsing="false" onAction="#draft" text="Draft" />
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" right="10.0" />
+         </padding>
+      </HBox>
    </children>
 </VBox>

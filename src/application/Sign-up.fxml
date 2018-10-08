@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
@@ -7,36 +8,122 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="496.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SignupControl">
    <children>
-      <AnchorPane prefHeight="496.0" prefWidth="429.0" VBox.vgrow="ALWAYS">
+      <HBox alignment="TOP_CENTER" prefHeight="78.0" prefWidth="453.0">
          <children>
-            <Label layoutX="104.0" layoutY="42.0" text="Create a Snail Account">
+            <Label text="Create a Snail Account">
                <font>
                   <Font name="Charter Roman" size="25.0" />
                </font>
             </Label>
-            <TextField fx:id="firstNameTextField" layoutX="104.0" layoutY="85.0" prefHeight="27.0" prefWidth="248.0" promptText="First name" />
-            <TextField fx:id="lastNameTextField" layoutX="104.0" layoutY="127.0" prefHeight="27.0" prefWidth="248.0" promptText="Last name" />
-            <TextField fx:id="usernameTextField" layoutX="104.0" layoutY="169.0" onAction="#username" prefHeight="27.0" prefWidth="248.0" promptText="Username" />
-            <TextField fx:id="tf" editable="false" layoutX="104.0" layoutY="222.0" prefHeight="27.0" prefWidth="248.0" />
-            <PasswordField fx:id="passwordTextField" layoutX="104.0" layoutY="222.0" onAction="#password" prefHeight="27.0" prefWidth="248.0" promptText="Password" />
-            <PasswordField fx:id="confirmPasswordTextField" layoutX="104.0" layoutY="280.0" onAction="#confirmpassword" prefHeight="27.0" prefWidth="248.0" promptText="Confirm password" />
-            <Hyperlink layoutX="137.0" layoutY="401.0" onAction="#signIn" text="Already a Snail? Sign-In here!">
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="50.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="27.0" prefWidth="453.0">
+         <children>
+            <TextField fx:id="firstNameTextField" prefHeight="27.0" prefWidth="248.0" promptText="First name" />
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="30.0" prefWidth="453.0">
+         <padding>
+            <Insets top="15.0" />
+         </padding>
+         <children>
+            <TextField fx:id="lastNameTextField" prefHeight="27.0" prefWidth="248.0" promptText="Last name" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="27.0" prefWidth="453.0">
+         <padding>
+            <Insets top="15.0" />
+         </padding>
+         <children>
+            <TextField fx:id="usernameTextField" onAction="#username" prefHeight="27.0" prefWidth="179.0" promptText="Username" />
+            <ComboBox fx:id="domain" onAction="#domainselect" prefHeight="27.0" prefWidth="69.0" promptText="\@" />
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="8.0" prefWidth="453.0">
+         <children>
+            <Label text="Must not be over 20 characters." />
+         </children>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="4.0" prefWidth="453.0">
+         <children>
+            <StackPane>
+               <children>
+                  <TextField fx:id="tf" editable="false" prefHeight="27.0" prefWidth="248.0" />
+                  <PasswordField fx:id="passwordTextField" onAction="#password" prefHeight="27.0" prefWidth="248.0" promptText="Password" />
+               </children>
+               <HBox.margin>
+                  <Insets left="26.0" />
+               </HBox.margin>
+            </StackPane>
+            <CheckBox fx:id="check" mnemonicParsing="false">
+               <padding>
+                  <Insets left="10.0" />
+               </padding></CheckBox>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+         <padding>
+            <Insets left="2.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="TOP_CENTER">
+         <children>
+            <Label text="Must be between 4-12 characters." />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="20.0" prefWidth="453.0">
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+         <children>
+            <PasswordField fx:id="confirmPasswordTextField" onAction="#confirmpassword" prefHeight="27.0" prefWidth="248.0" promptText="Confirm password" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="453.0">
+         <padding>
+            <Insets top="30.0" />
+         </padding>
+         <children>
+            <Button mnemonicParsing="false" onAction="#signup" text="Sign-Up" />
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="40.0" prefWidth="453.0">
+         <children>
+            <Hyperlink onAction="#signIn" text="Already a Snail? Sign-In here!">
                <font>
                   <Font name="Georgia" size="13.0" />
                </font>
+               <HBox.margin>
+                  <Insets top="7.0" />
+               </HBox.margin>
             </Hyperlink>
-            <Button layoutX="193.0" layoutY="354.0" mnemonicParsing="false" onAction="#signup" text="Sign-Up" />
-            <Label layoutX="110.0" layoutY="196.0" text="Must not be over 20 characters." />
-            <Label layoutX="110.0" layoutY="256.0" text="Must be between 4-12 characters." />
-            <CheckBox fx:id="check" layoutX="363.0" layoutY="226.0" mnemonicParsing="false" />
-            <ComboBox fx:id="domain" layoutX="287.0" layoutY="169.0" onAction="#domainselect" prefHeight="27.0" prefWidth="69.0" promptText="\@" />
          </children>
-      </AnchorPane>
+         <padding>
+            <Insets bottom="50.0" top="10.0" />
+         </padding>
+      </HBox>
    </children>
 </VBox>
