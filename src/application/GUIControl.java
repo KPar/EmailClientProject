@@ -71,7 +71,7 @@ public class GUIControl {
 
 	public void refreshList(ActionEvent actionEvent) {
 		Button bttn = (Button) actionEvent.getSource();
-		List list;
+		List list = null;
 		switch (bttn.getId()){
 			case "inboxBttn":
 				currentFolder =0;
@@ -85,10 +85,24 @@ public class GUIControl {
 				currentFolder =2;
 				list = dbHelper.getEmails(userId,2);
 				break;
+			case "refreshBttn":
+			    switch (currentFolder) {
+                    case 0:
+                        list = dbHelper.getEmails(userId, 0);
+                        break;
+                    case 1:
+                        list = dbHelper.getEmails(userId, 1);
+                        break;
+                    case 2:
+                        list = dbHelper.getEmails(userId, 2);
+                        break;
+                }
+                break;
 			default:
 				list = dbHelper.getEmails(userId,0);
 				break;
 		}
+		
 		if(list!=null){
 			ObservableList<String> observableList = FXCollections.observableList(list);
 			emailListView.setItems(observableList);

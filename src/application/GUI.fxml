@@ -6,75 +6,53 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GUIControl">
-   <bottom>
-      <HBox BorderPane.alignment="CENTER">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GUIControl">
+   <children>
+      <HBox prefHeight="399.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label alignment="CENTER" prefHeight="17.0" prefWidth="600.0" text="SnailTheMail2018" HBox.hgrow="ALWAYS" />
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <padding>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </padding>
-      </HBox>
-   </bottom>
-   <left>
-      <VBox prefHeight="300.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="emailAddressLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="66.0" prefWidth="197.0" text="UserName@cq.edu" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
-            <Button fx:id="inboxBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 0;" text="INBOX">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="sentBttn" layoutX="10.0" layoutY="37.0" mnemonicParsing="false" onAction="#refreshList" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 0;" text="SENT">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="draftsBttn" layoutX="10.0" layoutY="67.0" mnemonicParsing="false" onAction="#refreshList" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 0;" text="DRAFTS">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </Button>
-            <BorderPane prefHeight="163.0" prefWidth="200.0">
-               <center>
-                  <Button mnemonicParsing="false" onAction="#composeEmail" text="Compose" BorderPane.alignment="CENTER" />
-               </center>
-               <bottom>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#signOut" prefHeight="56.0" prefWidth="200.0" style="-fx-background-radius: 0;" text="SIGN OUT" textAlignment="CENTER" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="Calibri Bold" size="16.0" />
-                     </font>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="383.0" prefWidth="150.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#composeEmail" text="Compose">
+                     <VBox.margin>
+                        <Insets bottom="40.0" top="40.0" />
+                     </VBox.margin>
                   </Button>
-               </bottom>
-            </BorderPane>
-         </children>
-      </VBox>
-   </left>
-   <center>
-      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-               <children>
-                  <ListView fx:id="emailListView" layoutX="56.0" layoutY="-41.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" onKeyPressed="#directionalEmailMove" onMouseClicked="#displayEmail" prefHeight="173.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="inboxBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" text="Inbox" />
+                  <Button fx:id="sentBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" text="Sent" />
+                  <Button fx:id="draftsBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" text="Drafts" />
+                  <Region prefHeight="113.0" prefWidth="150.0" VBox.vgrow="ALWAYS" />
+                  <Label fx:id="emailAddressLabel" alignment="CENTER" prefHeight="41.0" prefWidth="174.0" text="username" textAlignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#signOut" prefHeight="27.0" prefWidth="153.0" text="Sign out" />
                </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+            </VBox>
+            <VBox prefHeight="383.0" prefWidth="476.0" HBox.hgrow="ALWAYS">
                <children>
-                  <TextArea fx:id="emailTextArea" editable="false" layoutX="-15.0" layoutY="27.0" prefHeight="158.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
-                  <Button layoutY="2.0" mnemonicParsing="false" onAction="#replyEmail" text="Reply" />
-                  <Button layoutX="46.0" layoutY="2.0" mnemonicParsing="false" onAction="#forwardEmail" text="Forward" />
-               </children></AnchorPane>
-        </items>
-      </SplitPane>
-   </center>
-</BorderPane>
+                  <HBox prefHeight="30.0" prefWidth="472.0">
+                     <children>
+                        <Button fx:id="refreshBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="30.0" prefWidth="72.0" text="Refresh" />
+                        <Region prefHeight="27.0" prefWidth="246.0" HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#replyEmail" prefHeight="30.0" prefWidth="57.0" text="Reply" />
+                        <Button mnemonicParsing="false" onAction="#forwardEmail" prefHeight="30.0" text="Forward" />
+                     </children>
+                  </HBox>
+                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="387.0" prefWidth="472.0" VBox.vgrow="ALWAYS">
+                     <items>
+                        <ListView fx:id="emailListView" prefHeight="200.0" prefWidth="200.0" />
+                        <TextArea fx:id="emailTextArea" prefHeight="200.0" prefWidth="200.0" />
+                     </items>
+                  </SplitPane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefWidth="600.0" text="SnailtheMail2018" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

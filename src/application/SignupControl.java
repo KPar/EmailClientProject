@@ -168,6 +168,7 @@ public class SignupControl extends TextField{
             }
         }
 
+        //checksd domain
         if(!(usernameTextField.getText().endsWith("@cq.edu") || usernameTextField.getText().endsWith("@yg.com") || usernameTextField.getText().endsWith("@lnb.gov"))){
             AlertBox("Username Error", "must have domain at the end.");
             return;
