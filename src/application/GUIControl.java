@@ -9,17 +9,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class GUIControl {
 	DatabaseHelper dbHelper;
@@ -38,6 +35,9 @@ public class GUIControl {
 	public void initialize(){
 		dbHelper=new DatabaseHelper();
 		emailAddressLabel.setText(dbHelper.getName(userId)+"\n("+dbHelper.getEmailAddress(userId)+")");
+
+
+
 		List list = dbHelper.getEmails(userId,0);
 		if(list!=null){
 			ObservableList<String> observableList = FXCollections.observableList(list);
@@ -68,7 +68,8 @@ public class GUIControl {
 	public void signOut(ActionEvent event) throws IOException {
 		Parent account = FXMLLoader.load(getClass().getResource("Login.fxml"));
 		Scene accountscene = new Scene(account);
-		
+		accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
+
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow(); 
 		
 		window.setScene(accountscene);
@@ -79,6 +80,7 @@ public class GUIControl {
 	public void composeEmail(ActionEvent evt) throws IOException {
         Parent account = FXMLLoader.load(getClass().getResource("Email.fxml"));
         Scene accountscene = new Scene(account);
+		accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
         Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
 
@@ -146,6 +148,7 @@ public class GUIControl {
 				EmailControl.emailId=Integer.parseInt(emailContent[5]);
 				Parent account = FXMLLoader.load(getClass().getResource("Email.fxml"));
 				Scene accountscene = new Scene(account);
+				accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
 				Stage window = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
 
@@ -188,6 +191,7 @@ public class GUIControl {
 
 		Parent account = FXMLLoader.load(getClass().getResource("Email.fxml"));
 		Scene accountscene = new Scene(account);
+		accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
 		Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 
@@ -216,6 +220,7 @@ if(emailContent==null){
 
 		Parent account = FXMLLoader.load(getClass().getResource("Email.fxml"));
 		Scene accountscene = new Scene(account);
+		accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
 		Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 

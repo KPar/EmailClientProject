@@ -88,6 +88,7 @@ public class EmailControl extends TextField {
             if(dbHelper.updateEmail(emailId, recipient, subject, content, 0)){
                 Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
                 Scene accountscene = new Scene(account);
+                accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
                 Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
 
@@ -100,6 +101,7 @@ public class EmailControl extends TextField {
             if(dbHelper.sendEmail(GUIControl.userId,recipient,subject, content, 0)){
                 Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
                 Scene accountscene = new Scene(account);
+                accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
                 Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
 
@@ -121,6 +123,7 @@ public class EmailControl extends TextField {
             if(dbHelper.updateEmail(emailId,recipient,subject, content, 1)){
                 Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
                 Scene accountscene = new Scene(account);
+                accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
                 Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
 
@@ -133,6 +136,7 @@ public class EmailControl extends TextField {
             if(dbHelper.sendEmail(GUIControl.userId,recipient,subject, content, 1)){
                 Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
                 Scene accountscene = new Scene(account);
+                accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
                 Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
 
@@ -149,6 +153,7 @@ public class EmailControl extends TextField {
         System.out.println("Discard email.");
         Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
         Scene accountscene = new Scene(account);
+        accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
         Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
 

@@ -21,7 +21,9 @@ public class Main extends Application{
 		
 		Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 		primaryStage.setTitle("Snail Mail");
-		primaryStage.setScene(new Scene(root, 600, 500));
+		Scene accountscene = new Scene(root, 600, 500);
+		accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
+		primaryStage.setScene(accountscene);
 		primaryStage.show();
 	}
 	

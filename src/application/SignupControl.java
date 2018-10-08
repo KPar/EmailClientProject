@@ -64,6 +64,7 @@ public class SignupControl extends TextField{
     public void signIn(ActionEvent event) throws IOException {
         Parent account = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Scene accountscene = new Scene(account);
+        accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
@@ -206,6 +207,7 @@ public class SignupControl extends TextField{
 
         Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
         Scene accountscene = new Scene(account);
+        accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 

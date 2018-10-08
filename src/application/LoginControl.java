@@ -13,6 +13,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
@@ -102,6 +103,7 @@ public class LoginControl {
     public void signUp(ActionEvent event) throws IOException {
         Parent account = FXMLLoader.load(getClass().getResource("Sign-up.fxml"));
         Scene accountscene = new Scene(account);
+        accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 

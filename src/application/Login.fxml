@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginControl">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1B2631;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginControl">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -34,8 +34,8 @@
                   <Insets right="10.0" top="5.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="usernameTextField" onAction="#signIn" prefHeight="27.0" prefWidth="231.0" promptText="turbothesnail@cq.edu" />
-            <ComboBox fx:id="domain" onAction="#domainselect" prefHeight="27.0" prefWidth="61.0" promptText="\@">
+            <TextField fx:id="usernameTextField" onAction="#signIn" prefHeight="27.0" prefWidth="180.0" promptText="turbothesnail@cq.edu" />
+            <ComboBox fx:id="domain" onAction="#domainselect" prefHeight="27.0" prefWidth="108.0" promptText="\@">
                <HBox.margin>
                   <Insets left="5.0" />
                </HBox.margin>
@@ -49,10 +49,10 @@
                   <Insets left="5.0" right="10.0" top="5.0" />
                </HBox.margin>
             </Label>
-            <StackPane prefHeight="27.0" prefWidth="231.0">
+            <StackPane prefHeight="27.0" prefWidth="237.0">
                <children>
-                  <TextField fx:id="showpassword" editable="false" prefHeight="27.0" prefWidth="231.0" />
-                  <PasswordField fx:id="passwordTextField" onAction="#signIn" prefHeight="27.0" prefWidth="231.0" promptText="SnailsareNotS7u6s!!!" />
+                  <TextField fx:id="showpassword" prefHeight="27.0" prefWidth="231.0" />
+                  <PasswordField fx:id="passwordTextField" onAction="#signIn" prefHeight="27.0" prefWidth="197.0" promptText="SnailsareNotS7u6s!!!" />
                </children>
                <HBox.margin>
                   <Insets />
@@ -73,16 +73,19 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="94.0" prefWidth="600.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#signIn" text="Sign-in">
+            <Button mnemonicParsing="false" onAction="#signIn" text="SIGN IN">
                <HBox.margin>
                   <Insets top="20.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
             </Button>
          </children>
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="87.0" prefWidth="600.0">
          <children>
-            <Hyperlink onAction="#signUp" text="Not SIgned Up? Click Here." />
+            <Hyperlink onAction="#signUp" text="Not Signed Up? Click Here." />
          </children>
       </HBox>
    </children>

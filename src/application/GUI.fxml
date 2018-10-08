@@ -15,54 +15,58 @@
    <children>
       <HBox prefHeight="399.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox alignment="BOTTOM_CENTER" prefHeight="383.0" prefWidth="150.0">
+            <VBox alignment="BOTTOM_CENTER" prefHeight="383.0" prefWidth="150.0" style="-fx-background-color: #1B2631;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#composeEmail" text="Compose">
+                  <Button id="compose" mnemonicParsing="false" onAction="#composeEmail" text="COMPOSE">
                      <VBox.margin>
                         <Insets bottom="40.0" top="40.0" />
                      </VBox.margin>
                   </Button>
-                  <Button id="inboxBttn" fx:id="inboxBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" styleClass="inboxBttn" text="INBOX">
+                  <Button fx:id="inboxBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" styleClass="folderBttn" text="INBOX">
+                     <font>
+                        <Font name="Calibri Bold" size="15.0" />
+
+                     </font></Button>
+                  <Button fx:id="sentBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" styleClass="folderBttn" text="SENT">
                      <font>
                         <Font name="Calibri Bold" size="15.0" />
                      </font></Button>
-                  <Button fx:id="sentBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" text="SENT">
-                     <font>
-                        <Font name="Calibri Bold" size="15.0" />
-                     </font></Button>
-                  <Button fx:id="draftsBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" text="DRAFTS">
+                  <Button fx:id="draftsBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" styleClass="folderBttn" text="DRAFTS">
                      <font>
                         <Font name="Calibri Bold" size="15.0" />
                      </font></Button>
                   <Region prefHeight="113.0" prefWidth="150.0" VBox.vgrow="ALWAYS" />
                   <Label fx:id="emailAddressLabel" alignment="CENTER" prefHeight="41.0" prefWidth="174.0" text="username" textAlignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#signOut" prefHeight="27.0" prefWidth="153.0" text="Sign out" />
+                  <Button id="sign-out" mnemonicParsing="false" onAction="#signOut" prefHeight="27.0" prefWidth="153.0" text="SIGN OUT">
+                     <font>
+                        <Font name="Calibri Bold" size="15.0" />
+                     </font>
+                  </Button>
                </children>
             </VBox>
             <VBox prefHeight="383.0" prefWidth="476.0" HBox.hgrow="ALWAYS">
                <children>
                   <HBox prefHeight="30.0" prefWidth="472.0">
                      <children>
-                        <Button fx:id="refreshBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="30.0" prefWidth="72.0" text="Refresh" />
-                        <Region prefHeight="27.0" prefWidth="246.0" HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" onAction="#replyEmail" prefHeight="30.0" prefWidth="57.0" text="Reply" />
-                        <Button mnemonicParsing="false" onAction="#forwardEmail" prefHeight="30.0" text="Forward" />
+                        <Button fx:id="refreshBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="30.0" prefWidth="72.0" styleClass="secondary-buttons" text="REFRESH" />
+                        <Region prefHeight="27.0" prefWidth="246.0" style="-fx-background-color: #1B2631;" HBox.hgrow="ALWAYS">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets></Region>
+                        <Button mnemonicParsing="false" onAction="#replyEmail" prefHeight="30.0" prefWidth="57.0" styleClass="secondary-buttons" text="REPLY" />
+                        <Button mnemonicParsing="false" onAction="#forwardEmail" prefHeight="30.0" styleClass="secondary-buttons" text="FORWARD" />
                      </children>
                   </HBox>
-                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="387.0" prefWidth="472.0" VBox.vgrow="ALWAYS">
+                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="387.0" prefWidth="472.0" style="-fx-background-color: #2C3E50;" VBox.vgrow="ALWAYS">
                      <items>
                         <ListView id="listView" fx:id="emailListView" onKeyPressed="#directionalEmailMove" onMouseClicked="#displayEmail" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2C3E50;" />
-                        <TextArea fx:id="emailTextArea" prefHeight="200.0" prefWidth="200.0" />
+                        <TextArea fx:id="emailTextArea" prefHeight="200.0" prefWidth="200.0" style="-fx-control-inner-background: #2C3E50; -fx-background-color: #2C3E50;" />
                      </items>
                   </SplitPane>
                </children>
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" prefWidth="600.0" text="SnailtheMail2018" HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
+      <HBox alignment="CENTER" />
    </children>
 </VBox>

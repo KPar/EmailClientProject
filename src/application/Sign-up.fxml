@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="496.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SignupControl">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="496.0" prefWidth="453.0" style="-fx-background-color: #1B2631;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SignupControl">
    <children>
       <HBox alignment="TOP_CENTER" prefHeight="78.0" prefWidth="453.0">
          <children>
@@ -64,7 +64,7 @@
          <children>
             <StackPane>
                <children>
-                  <TextField fx:id="tf" editable="false" prefHeight="27.0" prefWidth="248.0" />
+                  <TextField fx:id="tf" prefHeight="27.0" prefWidth="248.0" />
                   <PasswordField fx:id="passwordTextField" onAction="#password" prefHeight="27.0" prefWidth="248.0" promptText="Password" />
                </children>
                <HBox.margin>

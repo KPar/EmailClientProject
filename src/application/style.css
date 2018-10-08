@@ -1,20 +1,59 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
-"-fx-background-radius: 0"
+Button {
+    -fx-text-fill:#F2F4F4;
+    -fx-background-color:#1B2631;
+    -fx-background-radius: 0;
+}
 
+.secondary-buttons{
+    -fx-text-fill:#F2F4F4;
+    -fx-font: bold 13 "Calibri";
+}
+
+Label {
+    -fx-text-fill:#F2F4F4;
+}
+
+TextField{
+    -fx-text-fill:#F2F4F4;
+    -fx-background-color:#283747;
+}
+PasswordField{
+    -fx-text-fill:#F2F4F4;
+    -fx-background-color:#283747;
+}
+#compose{
+    -fx-font: bold 15 "Calibri";
+    -fx-text-fill:#27AE60;
+
+}
+
+#sign-out {
+    -fx-text-fill:#E74C3C;
+
+}
+
+/*TextArea (
+    -fx-control-inner-background:#283747;
+
+)*/
 .folderBttn {
-    -fx-background-color:#000000;
-    -fx-background-radius: 0;
+    -fx-text-fill:#F2F4F4;
 }
 
-.inboxBttn {
-    -fx-background-color:#000000;
-    -fx-background-radius: 0;
+.folderBttn:hover {
+    -fx-background-color:#405872;
 }
+.folderBttn:focused {
+    -fx-text-fill:#F4D03F;
+}
+
 
 .list-view .list-cell {
+-fx-padding: 10px ;
 -fx-background-color:#2C3E50;
 -fx-text-fill:#F2F4F4;
--fx-font: 14 "Calibri";
+-fx-font: bold 13 "Calibri";
+
 }
 
 .list-view:focused .list-cell:selected {
@@ -25,4 +64,7 @@
 -fx-background-color:#45617D;
 
 }
+
+
+
 
