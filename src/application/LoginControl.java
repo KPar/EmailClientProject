@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -82,7 +83,7 @@ public class LoginControl {
 
                 Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
                 Scene accountscene = new Scene(account);
-
+                accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
                 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
                 window.setScene(accountscene);

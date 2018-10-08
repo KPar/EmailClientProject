@@ -1,0 +1,28 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+"-fx-background-radius: 0"
+
+.folderBttn {
+    -fx-background-color:#000000;
+    -fx-background-radius: 0;
+}
+
+.inboxBttn {
+    -fx-background-color:#000000;
+    -fx-background-radius: 0;
+}
+
+.list-view .list-cell {
+-fx-background-color:#2C3E50;
+-fx-text-fill:#F2F4F4;
+-fx-font: 14 "Calibri";
+}
+
+.list-view:focused .list-cell:selected {
+-fx-background-color:#45617D;
+}
+
+.list-view .list-cell:hover{
+-fx-background-color:#45617D;
+
+}
+

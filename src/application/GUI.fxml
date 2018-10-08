@@ -9,8 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GUIControl">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GUIControl">
    <children>
       <HBox prefHeight="399.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
          <children>
@@ -21,9 +22,18 @@
                         <Insets bottom="40.0" top="40.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="inboxBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" text="Inbox" />
-                  <Button fx:id="sentBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" text="Sent" />
-                  <Button fx:id="draftsBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" text="Drafts" />
+                  <Button id="inboxBttn" fx:id="inboxBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" styleClass="inboxBttn" text="INBOX">
+                     <font>
+                        <Font name="Calibri Bold" size="15.0" />
+                     </font></Button>
+                  <Button fx:id="sentBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" text="SENT">
+                     <font>
+                        <Font name="Calibri Bold" size="15.0" />
+                     </font></Button>
+                  <Button fx:id="draftsBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="40.0" prefWidth="150.0" text="DRAFTS">
+                     <font>
+                        <Font name="Calibri Bold" size="15.0" />
+                     </font></Button>
                   <Region prefHeight="113.0" prefWidth="150.0" VBox.vgrow="ALWAYS" />
                   <Label fx:id="emailAddressLabel" alignment="CENTER" prefHeight="41.0" prefWidth="174.0" text="username" textAlignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#signOut" prefHeight="27.0" prefWidth="153.0" text="Sign out" />
@@ -41,7 +51,7 @@
                   </HBox>
                   <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="387.0" prefWidth="472.0" VBox.vgrow="ALWAYS">
                      <items>
-                        <ListView fx:id="emailListView" onMouseClicked="#displayEmail" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView id="listView" fx:id="emailListView" onKeyPressed="#directionalEmailMove" onMouseClicked="#displayEmail" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2C3E50;" />
                         <TextArea fx:id="emailTextArea" prefHeight="200.0" prefWidth="200.0" />
                      </items>
                   </SplitPane>

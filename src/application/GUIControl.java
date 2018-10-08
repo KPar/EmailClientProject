@@ -9,16 +9,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class GUIControl {
 	DatabaseHelper dbHelper;
@@ -29,7 +30,7 @@ public class GUIControl {
 	private Label emailAddressLabel;
 
 	@FXML
-	private ListView emailListView;
+	private ListView<String> emailListView;
 
 	@FXML
 	private TextArea emailTextArea;
@@ -41,6 +42,22 @@ public class GUIControl {
 		if(list!=null){
 			ObservableList<String> observableList = FXCollections.observableList(list);
 			emailListView.setItems(observableList);
+			emailListView.setCellFactory(lv -> new ListCell<String>() {
+				@Override
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null) {
+						setText(null);
+						setStyle(null);
+					} else {
+						setText(item);
+						//setTextFill(Paint.valueOf("#F2F4F4"));
+
+						//setStyle("-fx-control-inner-background: #2C3E50;");
+					}
+				}
+			});
 		}else{
 			ObservableList<String> observableList = FXCollections.observableList(new ArrayList<>());
 			emailListView.setItems(observableList);
@@ -163,7 +180,9 @@ public class GUIControl {
 				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),0);
 				break;
 		}
-
+		if(emailContent==null){
+			return;
+		}
 		EmailControl.fwdEmail=true;
 		EmailControl.emailId=Integer.parseInt(emailContent[5]);
 
@@ -189,7 +208,9 @@ public class GUIControl {
 				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),0);
 				break;
 		}
-
+if(emailContent==null){
+	return;
+}
 		EmailControl.rpyEmail=true;
 		EmailControl.emailId=Integer.parseInt(emailContent[5]);
 

@@ -261,7 +261,7 @@ public class DatabaseHelper {
                 return null;
             }else{
                 while((rs.next())){
-                    data=getName(rs.getInt("senderId"))+"               "+rs.getString("dateText")+"\n"
+                    data=getName(rs.getInt("senderId"))+"\n"+rs.getString("dateText")+"\n"
                             +rs.getString("subject");
                     list.add(data);
                 }
