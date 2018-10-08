@@ -36,19 +36,32 @@
                         <Font name="Calibri Bold" size="15.0" />
                      </font></Button>
                   <Region prefHeight="113.0" prefWidth="150.0" VBox.vgrow="ALWAYS" />
-                  <Label fx:id="emailAddressLabel" alignment="CENTER" prefHeight="41.0" prefWidth="174.0" text="username" textAlignment="CENTER" />
+                  <Label fx:id="emailAddressLabel" alignment="CENTER" prefHeight="41.0" prefWidth="174.0" text="username" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding></Label>
                   <Button id="sign-out" mnemonicParsing="false" onAction="#signOut" prefHeight="27.0" prefWidth="153.0" text="SIGN OUT">
                      <font>
                         <Font name="Calibri Bold" size="15.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </Button>
+                  <Region prefHeight="22.0" prefWidth="138.0" />
                </children>
             </VBox>
             <VBox prefHeight="383.0" prefWidth="476.0" HBox.hgrow="ALWAYS">
                <children>
                   <HBox prefHeight="30.0" prefWidth="472.0">
                      <children>
-                        <Button fx:id="refreshBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="30.0" prefWidth="94.0" styleClass="secondary-buttons" text="REFRESH" />
+                        <Button fx:id="refreshBttn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#refreshList" prefHeight="27.0" prefWidth="72.0" styleClass="secondary-buttons" text="REFRESH">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding></Button>
                         <Region prefHeight="27.0" prefWidth="215.0" style="-fx-background-color: #1B2631;" HBox.hgrow="ALWAYS">
                            <opaqueInsets>
                               <Insets />
