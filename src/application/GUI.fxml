@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GUIControl">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GUIControl">
    <children>
       <HBox prefHeight="399.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
          <children>
@@ -48,12 +48,12 @@
                <children>
                   <HBox prefHeight="30.0" prefWidth="472.0">
                      <children>
-                        <Button fx:id="refreshBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="30.0" prefWidth="72.0" styleClass="secondary-buttons" text="REFRESH" />
-                        <Region prefHeight="27.0" prefWidth="246.0" style="-fx-background-color: #1B2631;" HBox.hgrow="ALWAYS">
+                        <Button fx:id="refreshBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="27.0" prefWidth="94.0" styleClass="secondary-buttons" text="REFRESH" />
+                        <Region prefHeight="27.0" prefWidth="215.0" style="-fx-background-color: #1B2631;" HBox.hgrow="ALWAYS">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets></Region>
-                        <Button mnemonicParsing="false" onAction="#replyEmail" prefHeight="30.0" prefWidth="57.0" styleClass="secondary-buttons" text="REPLY" />
+                        <Button mnemonicParsing="false" onAction="#replyEmail" prefHeight="27.0" prefWidth="69.0" styleClass="secondary-buttons" text="REPLY" />
                         <Button mnemonicParsing="false" onAction="#forwardEmail" prefHeight="30.0" styleClass="secondary-buttons" text="FORWARD" />
                      </children>
                   </HBox>
