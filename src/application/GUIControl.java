@@ -137,13 +137,21 @@ public class GUIControl {
 		switch (currentFolder){
 			case 0:
 				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),0);
+				if(emailContent==null){
+					return;
+				}
 				break;
 			case 1:
 				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),1);
+				if(emailContent==null){
+					return;
+				}
 				break;
 			case 2:
 				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),2);
-
+				if(emailContent==null){
+					return;
+				}
 				EmailControl.dftEmail=true;
 				EmailControl.emailId=Integer.parseInt(emailContent[5]);
 				Parent account = FXMLLoader.load(getClass().getResource("Email.fxml"));
@@ -158,6 +166,9 @@ public class GUIControl {
 				return;
 			default:
 				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),0);
+				if(emailContent==null){
+					return;
+				}
 				break;
 
 
