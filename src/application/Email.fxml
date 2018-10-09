@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1B2631;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmailControl">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1B2631;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmailControl">
    <children>
       <HBox prefHeight="13.0" prefWidth="600.0" style="-fx-background-color: #1B2631;">
          <children>
@@ -17,7 +17,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="recipientTextField" prefHeight="27.0" prefWidth="485.0" style="-fx-background-color: #2C3E50;" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="recipientTextField" prefHeight="27.0" prefWidth="485.0" promptText="Multiple usernames are to be separated with a space &quot; &quot;" style="-fx-background-color: #2C3E50;" HBox.hgrow="ALWAYS" />
          </children>
          <VBox.margin>
             <Insets />
