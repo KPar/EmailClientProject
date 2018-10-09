@@ -262,25 +262,21 @@ public class DatabaseHelper {
 
     public boolean deleteEmail(int emailId, int RorS){
 
-        String sql = "UPDATE EmailsTable SET visibleR = ?, visibleS = ? "
+        String sql="";
+    if(RorS==0){
+        sql = "UPDATE EmailsTable SET visibleR = ? "
                 + "WHERE id = ?";
+    }else{
+        sql = "UPDATE EmailsTable SET visibleS = ? "
+                + "WHERE id = ?";
+    }
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, 0);
 
             // set the corresponding param
-            if(RorS==0){
-                pstmt.setInt(1, 0);
-                pstmt.setInt(2, 1);
-            }else{
-                pstmt.setInt(1, 1);
-                pstmt.setInt(2, 0);
-            }
-
-            pstmt.setInt(3, emailId);
-
-
-
+            pstmt.setInt(2, emailId);
 
             // update
             pstmt.executeUpdate();
