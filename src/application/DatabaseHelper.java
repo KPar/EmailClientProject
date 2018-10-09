@@ -79,6 +79,9 @@ public class DatabaseHelper {
     public int[] getUserId(String emailAddress){
         int[] result = new int[0];
 
+        if(emailAddress.length()==0){
+             return result;
+        }
         if(!emailAddress.contains("@")){
             return result;
         }
@@ -147,12 +150,24 @@ public class DatabaseHelper {
     }
 
     public boolean sendEmail(int senderUserId, String recipient, String subject, String content, int emailStatus){
-        int recipientUserId;
-        if(getUserId(recipient).length!=0){
-            recipientUserId = getUserId(recipient)[0];
+        int recipientUserId=0;
+
+        if (emailStatus==1){
+            if(recipient.length()!=0) {
+                if(getUserId(recipient).length!=0){
+                    recipientUserId = getUserId(recipient)[0];
+                }else{
+                    return false;
+                }
+            }
         }else{
-            return false;
+            if(getUserId(recipient).length!=0){
+                recipientUserId = getUserId(recipient)[0];
+            }else{
+                return false;
+            }
         }
+
 
             Date date = new Date();
             long dateNum = date.getTime();
@@ -187,10 +202,43 @@ public class DatabaseHelper {
     }
 
     public boolean updateEmail(int emailId, String emailAddress, String subject, String content, int emailStatus){
-
-        if(getUserId(emailAddress).length==0) {
-            return false;
+        /*if (emailStatus==1){
+            if(emailAddress!=null) {
+                if(getUserId(emailAddress).length!=0){
+                    recipientUserId = getUserId(emailAddress)[0];
+                }else{
+                    return false;
+                }
+            }
+        }else{
+            if(getUserId(emailAddress).length!=0){
+                recipientUserId = getUserId(emailAddress)[0];
+            }else{
+                return false;
+            }
         }
+
+        if(emailAddress==null||getUserId(emailAddress).length==0) {
+            return false;
+        }*/
+
+        int recipientId = 0;
+
+        if(emailStatus==0){
+            if(emailAddress==null){
+                return false;
+            } else if (getUserId(emailAddress).length==0){
+                return false;
+            }
+        }
+
+        if(emailAddress!=null){
+            if(getUserId(emailAddress).length!=0){
+                recipientId = getUserId(emailAddress)[0];
+            }
+        }
+
+
         Date date = new Date();
         long dateNum = date.getTime();
 
@@ -210,7 +258,7 @@ public class DatabaseHelper {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             // set the corresponding param
-            pstmt.setInt(1, getUserId(emailAddress)[0]);
+            pstmt.setInt(1, recipientId);
             pstmt.setString(2, subject);
             pstmt.setString(3, content);
             pstmt.setInt(4, emailStatus);
