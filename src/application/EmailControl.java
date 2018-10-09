@@ -164,14 +164,18 @@ public class EmailControl extends TextField {
 
     public void discard(ActionEvent evt) throws IOException{
         System.out.println("Discard email.");
-        Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
-        Scene accountscene = new Scene(account);
-        accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
+        if(draftEmail){
+            dbHelper.deleteEmail(emailId,1);
+        }
+            Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+            Scene accountscene = new Scene(account);
+            accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
 
-        Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
+            Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
 
-        window.setScene(accountscene);
-        window.show();
+            window.setScene(accountscene);
+            window.show();
+
     }
 
     private void AlertBox(String title, String message){
