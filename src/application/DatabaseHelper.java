@@ -297,19 +297,19 @@ public class DatabaseHelper {
         switch (currentFolder){
             case 0:
                 sql = "SELECT * FROM EmailsTable WHERE recipientId="+userId+" AND emailStatus="
-                        +0+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC";
+                        +0+" AND visibleR=1 ORDER BY dateInteger DESC";
                 break;
             case 1:
                 sql = "SELECT * FROM EmailsTable WHERE senderId="+userId+" AND emailStatus="
-                        +0+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC";
+                        +0+" AND visibleS=1 ORDER BY dateInteger DESC";
                 break;
             case 2:
                 sql = "SELECT * FROM EmailsTable WHERE senderId="+userId+" AND emailStatus="
-                        +1+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC";
+                        +1+" AND visibleS=1 ORDER BY dateInteger DESC";
                 break;
             default:
                 sql = "SELECT * FROM EmailsTable WHERE recipientId="+userId+" AND emailStatus="
-                        +0+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC";
+                        +0+" AND visibleS=1 ORDER BY dateInteger DESC";
                 break;
         }
 
@@ -340,19 +340,19 @@ public class DatabaseHelper {
         switch (currentFolder){
             case 0:
                 sql = "SELECT * FROM EmailsTable WHERE recipientId="+userId+" AND emailStatus="
-                        +0+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
+                        +0+" AND visibleR=1 ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
                 break;
             case 1:
                 sql = "SELECT * FROM EmailsTable WHERE senderId="+userId+" AND emailStatus="
-                        +0+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
+                        +0+" AND visibleS=1 ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
                 break;
             case 2:
                 sql = "SELECT * FROM EmailsTable WHERE senderId="+userId+" AND emailStatus="
-                        +1+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
+                        +1+" AND visibleS=1 ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
                 break;
             default:
                 sql = "SELECT * FROM EmailsTable WHERE recipientId="+userId+" AND emailStatus="
-                        +0+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
+                        +0+" AND visibleS=1 ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
                 break;
         }
 
