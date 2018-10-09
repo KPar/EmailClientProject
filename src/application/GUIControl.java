@@ -32,6 +32,10 @@ public class GUIControl {
 	@FXML
 	private TextArea emailTextArea;
 
+	@FXML
+	private Button refreshBttn;
+
+
 	public void initialize(){
 		dbHelper=new DatabaseHelper();
 		emailAddressLabel.setText(dbHelper.getName(userId)+"\n("+dbHelper.getEmailAddress(userId)+")");
@@ -117,6 +121,24 @@ public class GUIControl {
                         break;
                 }
                 break;
+			case "deleteBttn":
+				switch (currentFolder) {
+					case 0:
+						deleteEmail();
+						list = dbHelper.getEmails(userId, 0);
+						break;
+					case 1:
+						deleteEmail();
+
+						list = dbHelper.getEmails(userId, 1);
+						break;
+					case 2:
+						deleteEmail();
+
+						list = dbHelper.getEmails(userId, 2);
+						break;
+				}
+				break;
 			default:
 				list = dbHelper.getEmails(userId,0);
 				break;
@@ -179,6 +201,36 @@ public class GUIControl {
 
 	public void directionalEmailMove(KeyEvent keyEvent) throws IOException {
 		displayEmail(null);
+	}
+
+	public void deleteEmail() {
+		String[] emailContent;
+		switch (currentFolder){
+			case 0:
+				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),0);
+				break;
+			case 1:
+				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),1);
+				break;
+			default:
+				emailContent=dbHelper.getEmailContent(userId,emailListView.getSelectionModel().getSelectedIndex(),0);
+				break;
+		}
+		if(emailContent==null){
+			return;
+		}else{
+			switch (currentFolder){
+				case 0:
+					dbHelper.deleteEmail(Integer.parseInt(emailContent[5]), 0);
+					break;
+				case 1:
+					dbHelper.deleteEmail(Integer.parseInt(emailContent[5]), 1);
+					break;
+				default:
+					dbHelper.deleteEmail(Integer.parseInt(emailContent[5]), 1);
+					break;
+			}
+		}
 	}
 
 	public void forwardEmail(ActionEvent actionEvent) throws IOException {

@@ -19,7 +19,8 @@ public class DatabaseHelper {
             String sql = "CREATE TABLE IF NOT EXISTS EmailsTable ( " +
                     "id INTEGER PRIMARY KEY, subject TEXT, " +
                     "content TEXT, emailStatus INTEGER, senderId INTEGER, recipientId INTEGER, " +
-                    "dateText TEXT, dateInteger INTEGER" +
+                    "dateText TEXT, dateInteger INTEGER, visibleR INTEGER DEFAULT (1)," +
+                    "visibleS INTEGER DEFAULT (1)" +
                     ");";
             stmt.execute(sql);
             sql = "CREATE TABLE IF NOT EXISTS UsersTable (" +
@@ -259,24 +260,56 @@ public class DatabaseHelper {
         return true;
     }
 
+    public boolean deleteEmail(int emailId, int RorS){
+
+        String sql = "UPDATE EmailsTable SET visibleR = ?, visibleS = ? "
+                + "WHERE id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            if(RorS==0){
+                pstmt.setInt(1, 0);
+                pstmt.setInt(2, 1);
+            }else{
+                pstmt.setInt(1, 1);
+                pstmt.setInt(2, 0);
+            }
+
+            pstmt.setInt(3, emailId);
+
+
+
+
+            // update
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
     public List getEmails(int userId, int currentFolder){
         String sql;
         switch (currentFolder){
             case 0:
                 sql = "SELECT * FROM EmailsTable WHERE recipientId="+userId+" AND emailStatus="
-                        +0+" ORDER BY dateInteger DESC";
+                        +0+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC";
                 break;
             case 1:
                 sql = "SELECT * FROM EmailsTable WHERE senderId="+userId+" AND emailStatus="
-                        +0+" ORDER BY dateInteger DESC";
+                        +0+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC";
                 break;
             case 2:
                 sql = "SELECT * FROM EmailsTable WHERE senderId="+userId+" AND emailStatus="
-                        +1+" ORDER BY dateInteger DESC";
+                        +1+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC";
                 break;
             default:
                 sql = "SELECT * FROM EmailsTable WHERE recipientId="+userId+" AND emailStatus="
-                        +0+" ORDER BY dateInteger DESC";
+                        +0+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC";
                 break;
         }
 
@@ -307,19 +340,19 @@ public class DatabaseHelper {
         switch (currentFolder){
             case 0:
                 sql = "SELECT * FROM EmailsTable WHERE recipientId="+userId+" AND emailStatus="
-                        +0+" ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
+                        +0+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
                 break;
             case 1:
                 sql = "SELECT * FROM EmailsTable WHERE senderId="+userId+" AND emailStatus="
-                        +0+" ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
+                        +0+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
                 break;
             case 2:
                 sql = "SELECT * FROM EmailsTable WHERE senderId="+userId+" AND emailStatus="
-                        +1+" ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
+                        +1+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
                 break;
             default:
                 sql = "SELECT * FROM EmailsTable WHERE recipientId="+userId+" AND emailStatus="
-                        +0+" ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
+                        +0+" AND visibleR=1 AND visibleS=1 ORDER BY dateInteger DESC LIMIT "+emailPosition+",1";
                 break;
         }
 

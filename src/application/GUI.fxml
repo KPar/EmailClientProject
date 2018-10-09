@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GUIControl">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GUIControl">
    <children>
       <HBox prefHeight="399.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
          <children>
@@ -63,7 +63,7 @@
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets></Region>
-                        <Button fx:id="deleteBttn" mnemonicParsing="false" prefHeight="30.0" text="DELETE" />
+                        <Button fx:id="deleteBttn" mnemonicParsing="false" onAction="#refreshList" prefHeight="30.0" styleClass="secondary-buttons" text="DELETE" />
                         <Button mnemonicParsing="false" onAction="#replyEmail" prefHeight="30.0" prefWidth="69.0" styleClass="secondary-buttons" text="REPLY" />
                         <Button mnemonicParsing="false" onAction="#forwardEmail" prefHeight="30.0" styleClass="secondary-buttons" text="FORWARD" />
                      </children>
@@ -71,7 +71,7 @@
                   <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="387.0" prefWidth="472.0" style="-fx-background-color: #2C3E50;" VBox.vgrow="ALWAYS">
                      <items>
                         <ListView id="listView" fx:id="emailListView" onKeyPressed="#directionalEmailMove" onMouseClicked="#displayEmail" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2C3E50;" />
-                        <TextArea fx:id="emailTextArea" prefHeight="200.0" prefWidth="200.0" style="-fx-control-inner-background: #2C3E50; -fx-background-color: #2C3E50;" />
+                        <TextArea fx:id="emailTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-control-inner-background: #2C3E50; -fx-background-color: #2C3E50;" />
                      </items>
                   </SplitPane>
                </children>
