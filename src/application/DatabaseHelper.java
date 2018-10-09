@@ -202,25 +202,6 @@ public class DatabaseHelper {
     }
 
     public boolean updateEmail(int emailId, String emailAddress, String subject, String content, int emailStatus){
-        /*if (emailStatus==1){
-            if(emailAddress!=null) {
-                if(getUserId(emailAddress).length!=0){
-                    recipientUserId = getUserId(emailAddress)[0];
-                }else{
-                    return false;
-                }
-            }
-        }else{
-            if(getUserId(emailAddress).length!=0){
-                recipientUserId = getUserId(emailAddress)[0];
-            }else{
-                return false;
-            }
-        }
-
-        if(emailAddress==null||getUserId(emailAddress).length==0) {
-            return false;
-        }*/
 
         int recipientId = 0;
 

@@ -15,6 +15,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class EmailControl extends TextField {
 
@@ -82,23 +84,36 @@ public class EmailControl extends TextField {
     public void send(ActionEvent evt) throws IOException{
 
         String recipient = recipientTextField.getText();
+
+
+
+
         String subject = subjectTextField.getText();
         String content = contentTextField.getText();
+        //String[] j = (String[]) Arrays.stream(recipient.split(" ")).distinct().toArray();
         if(draftEmail){
-            if(dbHelper.updateEmail(emailId, recipient, subject, content, 0)){
-                Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
-                Scene accountscene = new Scene(account);
-                accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
-
-                Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
-
-                window.setScene(accountscene);
-                window.show();
-            }else{
-                AlertBox("Email Error", "Invalid Email");
+            //;recipient.split(" ")
+            for (String retval: Arrays.stream(recipient.split(" +")).distinct().collect(Collectors.toList())) {
+                if(!dbHelper.updateEmail(emailId, retval, subject, content, 0)){
+                    AlertBox("Email Error", "Invalid Email");
+                    return;
+                }
             }
+            Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+            Scene accountscene = new Scene(account);
+            accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
+
+            Stage window = (Stage)((Node)evt.getSource()).getScene().getWindow();
+
+            window.setScene(accountscene);
+            window.show();
         } else {
-            if(dbHelper.sendEmail(GUIControl.userId,recipient,subject, content, 0)){
+            for (String retval:  Arrays.stream(recipient.split(" +")).distinct().collect(Collectors.toList())) {
+                if(!dbHelper.sendEmail(GUIControl.userId,retval,subject, content, 0)){
+                    AlertBox("Email Error", "Invalid Email");
+                    return;
+                }
+            }
                 Parent account = FXMLLoader.load(getClass().getResource("GUI.fxml"));
                 Scene accountscene = new Scene(account);
                 accountscene.getStylesheets().add(GUIControl.class.getResource("style.css").toExternalForm());
@@ -107,9 +122,7 @@ public class EmailControl extends TextField {
 
                 window.setScene(accountscene);
                 window.show();
-            }else{
-                AlertBox("Email Error", "Invalid Email");
-            }
+
         }
 
     }
