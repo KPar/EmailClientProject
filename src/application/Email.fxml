@@ -17,7 +17,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="recipientTextField" prefHeight="27.0" prefWidth="485.0" promptText="Multiple usernames are to be separated with a space &quot; &quot;" style="-fx-background-color: #2C3E50;" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="recipientTextField" prefHeight="27.0" prefWidth="485.0" style="-fx-background-color: #2C3E50;" HBox.hgrow="ALWAYS" />
          </children>
          <VBox.margin>
             <Insets />
@@ -26,6 +26,11 @@
             <Insets left="51.0" right="10.0" top="20.0" />
          </padding>
       </HBox>
+      <VBox alignment="TOP_CENTER" prefHeight="5.0" prefWidth="100.0">
+         <children>
+            <Label alignment="TOP_LEFT" prefHeight="17.0" prefWidth="437.0" text="Multiple usernames are to be separated with a space &quot; &quot;" />
+         </children>
+      </VBox>
       <HBox prefHeight="13.0" prefWidth="600.0" style="-fx-background-color: #1B2631;">
          <children>
             <Label text="Subject:">
@@ -39,7 +44,7 @@
             <Insets />
          </VBox.margin>
          <padding>
-            <Insets bottom="30.0" left="20.0" right="10.0" top="20.0" />
+            <Insets bottom="30.0" left="20.0" right="10.0" top="5.0" />
          </padding>
       </HBox>
       <HBox alignment="CENTER" prefHeight="218.0" prefWidth="600.0" style="-fx-background-color: #1B2631;" VBox.vgrow="ALWAYS">

@@ -84,10 +84,6 @@ public class EmailControl extends TextField {
     public void send(ActionEvent evt) throws IOException{
 
         String recipient = recipientTextField.getText();
-
-
-
-
         String subject = subjectTextField.getText();
         String content = contentTextField.getText();
         //String[] j = (String[]) Arrays.stream(recipient.split(" ")).distinct().toArray();
