@@ -1,5 +1,5 @@
 # EmailClientProject
-Sign up and login to a self-contained email client that utilizes SQLite to manage emails and user data.
+Sign up and login to a self-contained email client that utilizes SQLite to manage emails and user data. A local database is created once program runs.
 
 ### Technologies
 Java, JavaFX, SQLite
